@@ -30,7 +30,7 @@
                 <td><?= $data->password; ?></td>
                 <td>
                     <button class="btn btn-sm btn-danger mb-2"><em class="fas fa-user-times"></em></button>
-                    <button class="btn btn-sm btn-info mb-2"><em class="fas fa-edit text-white"></em></button>
+                    <button class="btn btn-sm btn-info edit mb-2" data-id="<?= $data->id; ?>"><em class="fas fa-edit text-white"></em></button>
                     <button class="btn btn-sm btn-danger delete mb-2" data-id="<?= $data->id; ?>"><em class="fas fa-trash-alt"></em></button>
                 </td>
             </tr>

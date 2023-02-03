@@ -178,6 +178,50 @@
             });
         });
 
+        $('.account').on('click', '.edit', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/update-account.php',
+                data: {id:id},
+                type: 'post',
+                success:function(response)
+                {
+                    $('#update').modal('show');
+                    $('#action-edit').html(response);      
+                } 
+            });
+        });
+
+        $('#action-edit').on('click', '.reset', function(){
+            $('#update').modal('hide');
+        });
+
+        $('#action-edit').on('click', '.edit', function(){
+            var data = $('#action-edit').serialize();
+
+            $.ajax({
+                url: 'ajax/edit/account.php',
+                data: data,
+                type: 'post',
+                success:function(respond)
+                {
+                    if(respond == "success")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').html("Data Berhasil Diubah");
+                        $('.data').load('ajax/data/account.php');
+                        $('#update').modal('hide');
+                        setTimeout(function() {
+                                $('#message').slideUp('slow');
+                        }, 3500)
+                    }
+                }
+            })
+        })
+
 
 
 
