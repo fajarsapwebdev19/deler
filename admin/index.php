@@ -150,12 +150,14 @@
             });
         });
 
+        // on click button batal in action delete account
         $('#action-delete').on('click', '.batal', function(){
             setTimeout(function(){
                 $('#delete').slideUp("fast").modal('hide');
             }, 1000)
         });
 
+        // on click button hapus in action delete account
         $('#action-delete').on('click', '.hapus', function(){
             var id = $('#id_user').val();
 
@@ -178,6 +180,7 @@
             });
         });
 
+        // on click edit button in account
         $('.account').on('click', '.edit', function(){
             var id = $(this).data("id");
 
@@ -193,10 +196,12 @@
             });
         });
 
+        // on click reset in action edit account
         $('#action-edit').on('click', '.reset', function(){
             $('#update').modal('hide');
         });
 
+        // on click edit button in action edit account
         $('#action-edit').on('click', '.edit', function(){
             var data = $('#action-edit').serialize();
 
@@ -219,8 +224,96 @@
                         }, 3500)
                     }
                 }
-            })
-        })
+            });
+        });
+
+        // on click button active or non active account
+        $('.account').on('click', '.acnc', function() {
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/actvnonactaccount.php',
+                data: {id_user: id},
+                type: 'post',
+                success:function(response)
+                {
+                    $('#acnon').modal('show');
+                    $('#action-acnon').html(response);
+                }
+            });
+        });
+
+        $('#action-acnon').on('click', '.nonactive', function(){
+            var id_user = $('#user_id').val();
+            $.ajax({
+                url: 'ajax/method/aktivasiaccount.php',
+                data: {
+                    id_user: id_user,
+                    method: 'nonactive'
+                },
+                type: 'post',
+                success:function(response)
+                {
+                    if(response == "oke")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').html("Berhasil Melakukan Nonaktifkan Akun");
+                        $('#acnon').modal('hide');
+                        $('.account').load('ajax/data/account.php');
+                    }else{
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').html("Gagal");
+                        $('#acnon').modal('hide');
+                        $('.account').load('ajax/data/account.php');
+                    }
+
+                    setTimeout(function() {
+                        $('#message').slideUp('slow');
+                    }, 3000)
+                }
+            });
+        });
+
+        $('#action-acnon').on('click', '.active', function(){
+            var id_user = $('#user_id').val();
+            $.ajax({
+                url: 'ajax/method/aktivasiaccount.php',
+                data: {
+                    id_user: id_user,
+                    method: 'active'
+                },
+                type: 'post',
+                success:function(response)
+                {
+                    if(response == "oke")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').html("Berhasil Melakukan Aktifkan Akun");
+                        $('#acnon').modal('hide');
+                        $('.account').load('ajax/data/account.php');
+                    }else{
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').html("Gagal");
+                        $('#acnon').modal('hide');
+                        $('.account').load('ajax/data/account.php');
+                    }
+
+                    setTimeout(function() {
+                        $('#message').slideUp('slow');
+                    }, 3000)
+                }
+            });
+        });
+
+
 
 
 

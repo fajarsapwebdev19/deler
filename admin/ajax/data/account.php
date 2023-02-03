@@ -9,6 +9,7 @@
             <th>JK</th>
             <th>Email</th>
             <th class="text-center">Sudah Verifikasi</th>
+            <th class="text-center">Status Akun</th>
             <th>Username</th>
             <th>Password</th>
             <th>Action</th>
@@ -26,10 +27,24 @@
                 <td><?= ($data->jenis_kelamin == "Laki-Laki" ? 'L' : ($data->jenis_kelamin == "Perempuan" ? 'P' : '')) ?></td>
                 <td><?= $data->email; ?></td>
                 <td class="text-center"><?= ($data->verifikasi_email == "Belum" ? '<em class="fas fa-times-circle text-danger"></em>' : ($data->verifikasi_email == "Sudah" ? '<em class="fas fa-check-circle text-success"></em>' : '')); ?></td>
+                <td class="text-center"><?= ($data->status_akun == "Tidak Aktif" ? '<em class="fas fa-times-circle text-danger"></em>' : ($data->status_akun == "Aktif" ? '<em class="fas fa-check-circle text-success"></em>' : '')); ?></td>
                 <td><?= $data->username; ?></td>
                 <td><?= $data->password; ?></td>
                 <td>
-                    <button class="btn btn-sm btn-danger mb-2"><em class="fas fa-user-times"></em></button>
+                    <?php
+                        if($data->status_akun == "Aktif")
+                        {
+                            ?>
+                                <button class="btn btn-sm btn-danger mb-2 acnc" data-id="<?= $data->id_user; ?>"><em class="fas fa-times"></em></button>
+                            <?php
+                        }
+                        else if($data->status_akun == "Tidak Aktif")
+                        {
+                            ?>
+                                <button class="btn btn-sm btn-success mb-2 acnc" data-id="<?= $data->id_user; ?>"><em class="fas fa-check"></em></button>
+                            <?php
+                        }
+                    ?>
                     <button class="btn btn-sm btn-info edit mb-2" data-id="<?= $data->id; ?>"><em class="fas fa-edit text-white"></em></button>
                     <button class="btn btn-sm btn-danger delete mb-2" data-id="<?= $data->id; ?>"><em class="fas fa-trash-alt"></em></button>
                 </td>

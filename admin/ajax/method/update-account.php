@@ -28,7 +28,7 @@ $data = mysqli_fetch_object($query);
     </div>
     <div class="mb-3">
         <label for="">NIK</label>
-        <input type="text" name="nik" class="form-control" value="<?= $data->nik; ?>">
+        <input type="text" name="nik" class="form-control" value="<?= $data->nik; ?>" maxlength="16" minlength="16">
     </div>
     <div class="mb-3">
         <label for="">Email</label>
@@ -36,7 +36,7 @@ $data = mysqli_fetch_object($query);
     </div>
     <div class="mb-3">
         <label for="">No Telp</label>
-        <input type="text" name="telp" class="form-control" value="<?= $data->no_telp; ?>">
+        <input type="tel" name="telp" class="form-control" value="<?= $data->no_telp; ?>" maxlength="13" minlength="12">
         <input type="hidden" name="id" value="<?= $data->id; ?>">
     </div>
 </div>
