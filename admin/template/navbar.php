@@ -14,7 +14,7 @@
                         Master Data
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Data Merk</a></li>
+                        <li><a class="dropdown-item" href="?page=merk">Data Merk</a></li>
                         <li><a class="dropdown-item" href="#">Data Motor</a></li>
                     </ul>
                 </li>

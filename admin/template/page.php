@@ -15,5 +15,9 @@
         case 'account';
         require 'page/account.php';
         break;
+
+        case 'merk';
+        require 'page/merk.php';
+        break;
     }
 ?>
