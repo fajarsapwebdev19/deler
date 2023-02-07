@@ -15,7 +15,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="?page=merk">Data Merk</a></li>
-                        <li><a class="dropdown-item" href="#">Data Motor</a></li>
+                        <li><a class="dropdown-item" href="?page=motor">Data Motor</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -37,10 +37,9 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">Logout</a>
+                    <a href="../logout.php" class="nav-link">Logout</a>
                 </li>
             </ul>
-            
         </div>
     </div>
 </nav>

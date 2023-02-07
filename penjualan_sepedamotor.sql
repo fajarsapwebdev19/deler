@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 31, 2023 at 08:22 AM
+-- Generation Time: Feb 07, 2023 at 11:11 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -33,6 +33,16 @@ CREATE TABLE `merk` (
   `logo` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `merk`
+--
+
+INSERT INTO `merk` (`id`, `merk_name`, `logo`) VALUES
+(1, 'Honda', '747px-Honda_Logo.png'),
+(2, 'Yamaha', 'Yamaha-Logo-500x220.png'),
+(3, 'Kawasaki', 'Kawasaki-logo.png'),
+(4, 'Suzuki', 'Suzuki-logo-625x768.png');
+
 -- --------------------------------------------------------
 
 --
@@ -42,12 +52,54 @@ CREATE TABLE `merk` (
 CREATE TABLE `motor` (
   `id` int(11) NOT NULL,
   `id_merk` int(11) DEFAULT NULL,
+  `nama_motor` char(100) NOT NULL,
   `tahun` char(4) NOT NULL,
   `kondisi` char(80) NOT NULL,
   `harga` bigint(100) NOT NULL,
   `stok` bigint(11) NOT NULL,
   `foto` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `motor`
+--
+
+INSERT INTO `motor` (`id`, `id_merk`, `nama_motor`, `tahun`, `kondisi`, `harga`, `stok`, `foto`) VALUES
+(1, 1, 'Honda Beat Street 110 eSP', '2016', 'Baik', 10500000, 10, '1085755292___747px-Honda_Logo.png'),
+(2, 1, 'Honda Beat Street 110 eSP', '2017', 'Baik', 11500000, 10, '694578228___747px-Honda_Logo.png'),
+(3, 1, 'Honda Beat Street 110 eSP', '2018', 'Baik', 12500000, 10, '1700682239___747px-Honda_Logo.png'),
+(4, 1, 'Honda Beat Street 110 eSP', '2019', 'Baik', 13500000, 10, '1416750645___747px-Honda_Logo.png'),
+(5, 1, 'Honda All New Vario 150 eSP', '2017', 'Baik', 18000000, 10, '302201508___747px-Honda_Logo.png'),
+(6, 1, 'Honda All New Vario 150 eSP', '2018', 'Baik', 19000000, 10, '293574106___747px-Honda_Logo.png'),
+(7, 1, 'Honda PCX 150 CBU', '2014', 'Baik', 24700000, 10, '701593037___747px-Honda_Logo.png'),
+(8, 1, 'Honda PCX 150 CBU', '2015', 'Baik', 27600000, 10, '1045468586___747px-Honda_Logo.png'),
+(9, 1, 'Honda PCX 150 CBU', '2016', 'Baik', 28600000, 10, '195179870___747px-Honda_Logo.png'),
+(10, 1, 'Honda PCX 150 CBU', '2017', 'Baik', 29500000, 10, '1542755893___747px-Honda_Logo.png'),
+(11, 1, 'Honda PCX 150 ABS', '2018', 'Baik', 27500000, 10, '1536286238___747px-Honda_Logo.png'),
+(12, 3, 'Kawasaki Ninja 250 FI', '2014', 'Baik', 34000000, 10, '331443461___Kawasaki-logo.png'),
+(13, 3, 'Kawasaki Ninja 250 FI', '2015', 'Baik', 35000000, 10, '1027511986___Kawasaki-logo.png'),
+(14, 3, 'Kawasaki Ninja 250 FI', '2016', 'Baik', 39000000, 10, '1193251248___Kawasaki-logo.png'),
+(15, 3, 'Kawasaki Ninja 250 FI', '2017', 'Baik', 40000000, 10, '1295311786___Kawasaki-logo.png'),
+(16, 3, 'Kawasaki Ninja 250 FI', '2018', 'Baik', 42500000, 10, '192676198___Kawasaki-logo.png'),
+(17, 3, 'Kawasaki Ninja 250 ABS', '2014', 'Baik', 39800000, 10, '240040114___Kawasaki-logo.png'),
+(18, 3, 'Kawasaki Ninja 250 ABS', '2015', 'Baik', 40200000, 10, '812385594___Kawasaki-logo.png'),
+(19, 3, 'Kawasaki Ninja 250 ABS', '2016', 'Baik', 41600000, 10, '1169914618___Kawasaki-logo.png'),
+(20, 3, 'Kawasaki Ninja 250 ABS', '2017', 'Baik', 51700000, 10, '1109945289___Kawasaki-logo.png'),
+(21, 3, 'Kawasaki Ninja 250 ABS SE/LED', '2017', 'Baik', 47000000, 10, '1304061478___Kawasaki-logo.png'),
+(22, 4, 'Suzuki Satria FU 150', '2014', 'Baik', 10500000, 10, '1263266390___Suzuki-logo-625x768.png'),
+(23, 4, 'Suzuki Satria FU 150', '2015', 'Baik', 11400000, 10, '851524813___Suzuki-logo-625x768.png'),
+(24, 4, 'Suzuki Satria FU 150', '2017', 'Baik', 13000000, 10, '580181951___Suzuki-logo-625x768.png'),
+(25, 4, 'Suzuki Satria FU 150', '2018', 'Baik', 14000000, 10, '20539274___Suzuki-logo-625x768.png'),
+(26, 4, 'Suzuki GSX R 150', '2017', 'Baik', 16500000, 10, '382040649___Suzuki-logo-625x768.png'),
+(27, 4, 'Suzuki GSX 150 R', '2018', 'Baik', 18000000, 10, '624636875___Suzuki-logo-625x768.png'),
+(28, 4, 'Suzuki GSX 150 R', '2019', 'Baik', 19000000, 10, '1596415205___Suzuki-logo-625x768.png'),
+(29, 2, 'Yamaha Fino', '2014', 'Baik', 7400000, 10, '436441371___Yamaha-Logo-500x220.png'),
+(30, 2, 'Yamaha Fino', '2015', 'Baik', 8500000, 10, '1227269715___Yamaha-Logo-500x220.png'),
+(31, 2, 'Yamaha Fino', '2016', 'Baik', 9500000, 10, '1698439710___Yamaha-Logo-500x220.png'),
+(32, 2, 'Yamaha Fino', '2017', 'Baik', 10000000, 10, '1546260454___Yamaha-Logo-500x220.png'),
+(33, 2, 'Yamaha Fino', '2018', 'Baik', 11000000, 10, '232554911___Yamaha-Logo-500x220.png'),
+(34, 2, 'Yamaha Aerox 155', '2017', 'Baik', 18500000, 10, '1804495782___Yamaha-Logo-500x220.png'),
+(35, 2, 'Yamaha Aerox 155', '2018', 'Baik', 19000000, 10, '1815151418___Yamaha-Logo-500x220.png');
 
 -- --------------------------------------------------------
 
@@ -71,7 +123,7 @@ CREATE TABLE `personal_data` (
 --
 
 INSERT INTO `personal_data` (`id`, `nama`, `jenis_kelamin`, `nik`, `email`, `no_telp`, `create_date`, `modified_date`) VALUES
-(1, 'Fajar Saputra', 'Laki-Laki', 3671762376372673, 'fajarsaputratkj3@gmail.com', '081254199564', '2023-01-28', '0000-00-00');
+(1, 'Fajar Saputra', 'Laki-Laki', 3671762376372673, 'fajarsaputratkj3@gmail.com', '3287652387572', '2023-01-28', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -118,7 +170,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `personal_id`, `role_id`, `username`, `password`, `verifikasi_email`, `status_akun`, `kode_aktivasi`, `token`, `on_status`) VALUES
-(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Sudah', 'Aktif', NULL, '521078024128765786831012023', 'Online');
+(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Sudah', 'Aktif', NULL, '616472667185136361007022023', 'Online');
 
 --
 -- Indexes for dumped tables
@@ -163,13 +215,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `merk`
 --
 ALTER TABLE `merk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `motor`
 --
 ALTER TABLE `motor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `personal_data`

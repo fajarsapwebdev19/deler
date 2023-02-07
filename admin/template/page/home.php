@@ -12,7 +12,7 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-6 mb-3 text-center">
-                        <a href="" class="card">
+                        <a href="?page=motor" class="card">
                             <div class="card-body">
                                 <h1 class="fas fa-bicycle"></h1>
                                 <h5>Motor</h5>

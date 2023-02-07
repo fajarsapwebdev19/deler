@@ -27,6 +27,14 @@ if (empty($_SESSION['token'])) {
         .card {
             text-decoration: none;
         }
+
+        /* Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
     </style>
 </head>
 
@@ -311,7 +319,6 @@ if (empty($_SESSION['token'])) {
                         $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
                         $('#message').html("Foto Kosong");
                         $('#add').modal('hide');
-                        // $('.account').load('ajax/data/account.php');
                         setTimeout(function() {
                             $('#message').fadeOut('slow');
                         }, 5000)
@@ -323,7 +330,6 @@ if (empty($_SESSION['token'])) {
                         $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
                         $('#message').html("Ukuran File Foto Melebihi 2 MB");
                         $('#add').modal('hide');
-                        // $('.account').load('ajax/data/account.php');
                         setTimeout(function() {
                             $('#message').fadeOut('slow');
                         }, 5000)
@@ -336,7 +342,6 @@ if (empty($_SESSION['token'])) {
                         $('#message').addClass("alert alert-warning bg-warning text-dark mt-2");
                         $('#message').html("Extensi File Harus jpg,jpeg,atau png");
                         $('#add').modal('hide');
-                        // $('.account').load('ajax/data/account.php');
                         setTimeout(function() {
                             $('#message').fadeOut('slow');
                         }, 5000)
@@ -369,10 +374,215 @@ if (empty($_SESSION['token'])) {
                 success:function(respond)
                 {
                     $('#update').modal('show');
-                    $('#method-update').html(respond);
+                    $('#edit-form').html(respond);
                 }
-            })
-        })
+            });
+        });
+
+        // on click update button in edit form merk
+        $('#edit-form').on('click', '.update', function(){
+           var form = $('#edit-form')[0];
+           var data = new FormData(form);
+
+            $.ajax({
+                url: 'ajax/edit/merk.php',
+                data: data,
+                type: 'post',
+                cache: false,
+                processData: false,
+                contentType:false,
+                success:function(respond)
+                {
+                    if(respond == "maxsize")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').html("Ukuran File Foto Melebihi 2 MB");
+                        $('#update').modal('hide');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                    }
+                    else if(respond == "sizenotallowed")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').addClass("alert alert-warning bg-warning text-dark mt-2");
+                        $('#message').html("Extensi File Harus jpg,jpeg,atau png");
+                        $('#update').modal('hide');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                    }
+                    else if(respond == "success")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').removeClass("alert alert-warning bg-warning text-white mt-2");
+                        $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').html("Berhasil Ubah Data !");
+                        $('#update').modal('hide');
+                        $('.dm').load('ajax/data/merk.php');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                    }
+                }
+            });
+        });
+
+        // on click button hapus on data merk
+        $('.dm').on('click', '.hapus', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/delete-merk.php',
+                data: {id:id},
+                type: 'post',
+                success:function(respond)
+                {
+                    $('#delete').modal('show');
+                    $('#delete-form').html(respond);
+                }
+            });
+        });
+
+        // on click button yes in delete form merk
+        $('#delete-form').on('click', '.yes', function(){
+            var data = $('#delete-form').serialize();
+
+            $.ajax({
+                url: 'ajax/hapus/merk.php',
+                data: data,
+                type: 'post',
+                success:function(respond)
+                {
+                    $('#message').show();
+                    $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                    $('#message').removeClass("alert alert-warning bg-warning text-white mt-2");
+                    $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                    $('#message').html("Berhasil Hapus Data !");
+                    $('#delete').modal('hide');
+                    $('.dm').load('ajax/data/merk.php');
+                    setTimeout(function() {
+                         $('#message').fadeOut('slow');
+                    }, 5000)
+                }
+            });
+        });
+
+        $('.motor').load("ajax/data/motor.php");
+
+        $('.tambah').on('click', function(){
+            $('#tambah').modal('show');
+            
+        });
+
+        $('#tambah-motor').on('click', '.tambah', function(){
+            var form = $('#tambah-motor')[0];
+            var data = new FormData(form);
+
+            $.ajax({
+                url: 'ajax/tambah/motor.php',
+                data: data,
+                type: 'post',
+                cache: false,
+                processData: false,
+                contentType: false,
+                success:function(respond)
+                {
+                    if(respond == "imagenull")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').html("Foto Kosong");
+                        $('#tambah').modal('hide');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                    }
+                    else if(respond == "sizemax")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').html("Ukuran File Anda Melebihi 2 MB");
+                        $('#tambah').modal('hide');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                    }
+                    else if(respond == "notallowextension")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-danger bg-danger text-white mt-2");
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-warning bg-warning text-dark mt-2");
+                        $('#message').html("Ekstensi File Tidak Diizinkan");
+                        $('#tambah').modal('hide');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                    }
+                    else if(respond == "success")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert alert-warning bg-warning text-dark mt-2");
+                        $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                        $('#message').html("Berhasil Tambah Data !");
+                        $('#tambah').modal('hide');
+                        setTimeout(function() {
+                            $('#message').fadeOut('slow');
+                        }, 5000)
+                        $('.motor').load("ajax/data/motor.php");
+                        $("form")[0].reset();
+                    }
+                }
+            });
+        });
+
+        $('.motor').on('click', '.hapus', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/delete-motor.php',
+                data: {id:id},
+                type: 'post',
+                success:function(respond)
+                {
+                    $('#hapus').modal('show');
+                    $('#hapus-motor').html(respond);
+                }
+            });
+        });
+
+        $('#hapus-motor').on('click', '.oke', function(){
+            var data = $('#hapus-motor').serialize();
+
+            $.ajax({
+                url: 'ajax/hapus/motor.php',
+                data: data,
+                type: 'post',
+                success:function(respond)
+                {
+                    $('#message').show();
+                    $('#message').removeClass("alert alert-warning bg-warning text-dark mt-2");
+                    $('#message').removeClass("alert alert-success bg-success text-white mt-2");
+                    $('#message').addClass("alert alert-success bg-success text-white mt-2");
+                    $('#message').html("Berhasil Hapus Data !");
+                    $('#hapus').modal('hide');
+                    setTimeout(function() {
+                        $('#message').fadeOut('slow');
+                    }, 5000)
+                    $('.motor').load("ajax/data/motor.php");
+                    $(window).scrollTop(0);
+                }
+            });
+        });
     </script>
 </body>
 

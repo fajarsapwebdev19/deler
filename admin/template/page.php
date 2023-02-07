@@ -19,5 +19,9 @@
         case 'merk';
         require 'page/merk.php';
         break;
+
+        case 'motor';
+        require 'page/motor.php';
+        break;
     }
 ?>

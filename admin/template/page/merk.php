@@ -6,7 +6,7 @@
         <div id="message"></div>
     </div>
 
-    <div class="dm mt-2">
+    <div class="table-responsive dm mt-2">
         
     </div>
 </div>
