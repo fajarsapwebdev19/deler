@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2023 at 11:11 AM
+-- Generation Time: Feb 09, 2023 at 11:57 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Database: `penjualan_sepedamotor`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bukti_transfer_cash`
+--
+
+CREATE TABLE `bukti_transfer_cash` (
+  `id` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `jumlah_bayar` bigint(50) NOT NULL,
+  `keterangan` varchar(300) NOT NULL,
+  `status_verifikasi` enum('Antrian','Terima','Tolak') NOT NULL,
+  `time_payment` datetime NOT NULL,
+  `bukti` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bukti_transfer_kredit`
+--
+
+CREATE TABLE `bukti_transfer_kredit` (
+  `id` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `jumlah_bayar` bigint(50) NOT NULL,
+  `keterangan` varchar(300) NOT NULL,
+  `status_verifikasi` enum('Antrian','Terima','Tolak') NOT NULL,
+  `time_payment` datetime NOT NULL,
+  `bukti` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bukti_transfer_kredit`
+--
+
+INSERT INTO `bukti_transfer_kredit` (`id`, `id_transaksi`, `jumlah_bayar`, `keterangan`, `status_verifikasi`, `time_payment`, `bukti`) VALUES
+(1, 1, 2300000, 'Bayar Uang Muka', 'Antrian', '2023-02-09 17:09:51', '1478235525___WhatsApp Image 2023-01-19 at 16.10.50.jpg');
 
 -- --------------------------------------------------------
 
@@ -65,7 +104,7 @@ CREATE TABLE `motor` (
 --
 
 INSERT INTO `motor` (`id`, `id_merk`, `nama_motor`, `tahun`, `kondisi`, `harga`, `stok`, `foto`) VALUES
-(1, 1, 'Honda Beat Street 110 eSP', '2016', 'Baik', 10500000, 10, '1085755292___747px-Honda_Logo.png'),
+(1, 1, 'Honda Beat Street 110 eSP', '2016', 'Baik', 10500000, 9, '1085755292___747px-Honda_Logo.png'),
 (2, 1, 'Honda Beat Street 110 eSP', '2017', 'Baik', 11500000, 10, '694578228___747px-Honda_Logo.png'),
 (3, 1, 'Honda Beat Street 110 eSP', '2018', 'Baik', 12500000, 10, '1700682239___747px-Honda_Logo.png'),
 (4, 1, 'Honda Beat Street 110 eSP', '2019', 'Baik', 13500000, 10, '1416750645___747px-Honda_Logo.png'),
@@ -104,6 +143,25 @@ INSERT INTO `motor` (`id`, `id_merk`, `nama_motor`, `tahun`, `kondisi`, `harga`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pembayaran_tenor`
+--
+
+CREATE TABLE `pembayaran_tenor` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_transaksi` int(11) NOT NULL,
+  `tenor` int(11) NOT NULL,
+  `jatuh_tempo` int(11) NOT NULL,
+  `uang_tenor` bigint(50) NOT NULL,
+  `pembayaran_ke` int(11) NOT NULL,
+  `sisa` int(11) NOT NULL,
+  `tanggal_bayar` date NOT NULL,
+  `status_bayar` enum('Sudah','Belum') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `personal_data`
 --
 
@@ -123,7 +181,8 @@ CREATE TABLE `personal_data` (
 --
 
 INSERT INTO `personal_data` (`id`, `nama`, `jenis_kelamin`, `nik`, `email`, `no_telp`, `create_date`, `modified_date`) VALUES
-(1, 'Fajar Saputra', 'Laki-Laki', 3671762376372673, 'fajarsaputratkj3@gmail.com', '3287652387572', '2023-01-28', '0000-00-00');
+(1, 'Fajar Saputra', 'Laki-Laki', 3671762376372673, 'fajarsaputratkj3@gmail.com', '3287652387572', '2023-01-28', '0000-00-00'),
+(2, 'user', 'Laki-Laki', 367263872567452674, 'user@mail.com', '0889983789823', '2023-02-07', NULL);
 
 -- --------------------------------------------------------
 
@@ -149,6 +208,47 @@ INSERT INTO `role` (`id`, `role_name`, `create_date`, `modified_date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `transaksi_cash`
+--
+
+CREATE TABLE `transaksi_cash` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_motor` int(11) NOT NULL,
+  `tanggal_pembelian` datetime NOT NULL,
+  `pembayaran` enum('Transfer','Tunai') NOT NULL,
+  `status` enum('Paid','Unpaid') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transaksi_kredit`
+--
+
+CREATE TABLE `transaksi_kredit` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_motor` int(11) NOT NULL,
+  `uang_muka` bigint(50) NOT NULL,
+  `tenor` int(11) NOT NULL,
+  `uang_tenor` bigint(50) DEFAULT NULL,
+  `tanggal_beli` datetime NOT NULL,
+  `pembayaran` enum('Tunai','Transfer') NOT NULL,
+  `status` enum('Antrian','Terima','Tolak') DEFAULT NULL,
+  `status_lunas` enum('Lunas','Belum') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transaksi_kredit`
+--
+
+INSERT INTO `transaksi_kredit` (`id`, `id_user`, `id_motor`, `uang_muka`, `tenor`, `uang_tenor`, `tanggal_beli`, `pembayaran`, `status`, `status_lunas`) VALUES
+(1, 2, 1, 2300000, 11, 0, '2023-02-09 17:09:51', 'Transfer', NULL, 'Belum');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -170,11 +270,24 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `personal_id`, `role_id`, `username`, `password`, `verifikasi_email`, `status_akun`, `kode_aktivasi`, `token`, `on_status`) VALUES
-(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Sudah', 'Aktif', NULL, '616472667185136361007022023', 'Online');
+(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Sudah', 'Aktif', NULL, '1537015260130502892308022023', 'Online'),
+(2, 2, 2, 'user', 'user', 'Sudah', 'Aktif', NULL, '63175347178831184009022023', 'Online');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bukti_transfer_cash`
+--
+ALTER TABLE `bukti_transfer_cash`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bukti_transfer_kredit`
+--
+ALTER TABLE `bukti_transfer_kredit`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `merk`
@@ -186,6 +299,12 @@ ALTER TABLE `merk`
 -- Indexes for table `motor`
 --
 ALTER TABLE `motor`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pembayaran_tenor`
+--
+ALTER TABLE `pembayaran_tenor`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -201,6 +320,20 @@ ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `transaksi_cash`
+--
+ALTER TABLE `transaksi_cash`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_customer` (`id_user`),
+  ADD KEY `fk_motor` (`id_motor`);
+
+--
+-- Indexes for table `transaksi_kredit`
+--
+ALTER TABLE `transaksi_kredit`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -210,6 +343,18 @@ ALTER TABLE `user`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `bukti_transfer_cash`
+--
+ALTER TABLE `bukti_transfer_cash`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `bukti_transfer_kredit`
+--
+ALTER TABLE `bukti_transfer_kredit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `merk`
@@ -224,10 +369,16 @@ ALTER TABLE `motor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
+-- AUTO_INCREMENT for table `pembayaran_tenor`
+--
+ALTER TABLE `pembayaran_tenor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `personal_data`
 --
 ALTER TABLE `personal_data`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -236,14 +387,33 @@ ALTER TABLE `role`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `transaksi_cash`
+--
+ALTER TABLE `transaksi_cash`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `transaksi_kredit`
+--
+ALTER TABLE `transaksi_kredit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `transaksi_cash`
+--
+ALTER TABLE `transaksi_cash`
+  ADD CONSTRAINT `fk_customer` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_motor` FOREIGN KEY (`id_motor`) REFERENCES `motor` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user`
