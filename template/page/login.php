@@ -1,30 +1,32 @@
-<div class="page-content">
-    <div class="form-v5-content">
-        
-        <form class="form-detail" action="#" method="post">
-            <h2>Login</h2>
-            <?php
-                session_start();
-
-                if(isset($_SESSION['val']))
-                {
-                    echo $_SESSION['val'];
-                    unset($_SESSION['val']);
-                }
-            ?>
+<div class="col-md-5" style="padding-top: 160px;">
+    <div class="card">
+        <div class="card-body">
+            <div class="text-center">
+                <h3>Login</h3>
+            </div>
             <div id="pesan"></div>
-            <div class="form-row">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" class="input-text" placeholder="Your Username" required>
-                <i class="fas fa-user"></i>
+
             </div>
-            <div class="form-row">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="input-text" placeholder="Your Password" required>
-                <i class="fas fa-lock"></i>
-            </div>
-            <div class="form-row-last">
-                <input type="button" id="login" class="register" value="Login">
-            </div>
-        </form>
+            <form id="login-form" method="POST">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><em class="fas fa-user"></em></span>
+                    <input type="text" name="username" class="form-control form-control-lg" placeholder="Username">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1"><em class="fas fa-key"></em></span>
+                    <input type="password" name="password" class="form-control form-control-lg" id="password"
+                        placeholder="Password">
+                    <span class="input-group-text"><a class="shpw"><em class="fas fa-eye pwicon"></em></a></span>
+                </div>
+
+                <div class="text-center">
+                    <button type="button" class="btn btn-lg btn-primary" id="login">
+                        Login
+                    </button>
+                    <br><br>
+                    <a href="?page=register" style="text-decoration:none;">Create Account</a>
+                </div>
+            </form>
+        </div>
     </div>
+</div>

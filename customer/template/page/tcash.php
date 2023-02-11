@@ -2,18 +2,45 @@
     <div id="message"></div>
 
     <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Pengajuan</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Acc</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+        <div id="tcash" class="table-responsive">
+            <table class="table table-striped table-sm" style="font-size:10px;">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Tipe Motor</th>
+                        <th>Harga</th>
+                        <th>Pembayaran</th>
+                        <th>Tanggal Beli</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $id_user = $data_user->id_user;
+                        $sql = mysqli_query($con, "SELECT *,motor.id AS id_motor FROM transaksi_cash tc JOIN motor ON tc.id_motor = motor.id WHERE id_user='$id_user'");
+                        $no = 1;
+                        while($data = mysqli_fetch_object($sql))
+                        {
+                            ?>
+                                <tr>
+                                    <td><?= $no++; ?></td>
+                                    <td><?= $data->nama_motor ?> (<?= $data->tahun; ?>)</td>
+                                    <td><?= 'Rp. '.number_format($data->harga, 0,'.','.') ?></td>
+                                    <td><?= $data->pembayaran; ?></td>
+                                    <td><?= date('d-m-Y H:i:s', strtotime($data->tanggal_pembelian)); ?></td>
+                                    <td><?= ($data->status == NULL ? 'Antrian' : $data->status); ?></td>
+                                    <td>
+                                        <button class="btn btn-info text-white btn-sm">
+                                            <em class="fas fa-print"></em>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php
+                        }
+                    ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

@@ -11,5 +11,9 @@
         case 'login';
         require 'page/login.php';
         break;
+
+        case 'register';
+        require 'page/register.php';
+        break;
     }
 ?>

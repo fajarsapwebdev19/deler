@@ -23,6 +23,7 @@ if (empty($_SESSION['token'])) {
     <title>Home Admin</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/ui-form-login/fonts/font-awesome-5/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../assets/fw5/css/all.min.css">
     <style>
         .card {
             text-decoration: none;

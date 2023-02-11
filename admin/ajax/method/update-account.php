@@ -31,8 +31,8 @@ $data = mysqli_fetch_object($query);
         <input type="text" name="nik" class="form-control" value="<?= $data->nik; ?>" maxlength="16" minlength="16">
     </div>
     <div class="mb-3">
-        <label for="">Email</label>
-        <input type="text" name="email" class="form-control" value="<?= $data->email; ?>">
+        <label for="">Alamat</label>
+        <textarea name="alamat" class="form-control"><?= $data->alamat; ?></textarea>
     </div>
     <div class="mb-3">
         <label for="">No Telp</label>

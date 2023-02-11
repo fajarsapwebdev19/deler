@@ -7,8 +7,6 @@
             <th>No</th>
             <th>Nama</th>
             <th>JK</th>
-            <th>Email</th>
-            <th class="text-center">Sudah Verifikasi</th>
             <th class="text-center">Status Akun</th>
             <th>Username</th>
             <th>Password</th>
@@ -25,8 +23,6 @@
                 <td><?= $no++; ?></td>
                 <td><?= $data->nama; ?></td>
                 <td><?= ($data->jenis_kelamin == "Laki-Laki" ? 'L' : ($data->jenis_kelamin == "Perempuan" ? 'P' : '')) ?></td>
-                <td><?= $data->email; ?></td>
-                <td class="text-center"><?= ($data->verifikasi_email == "Belum" ? '<em class="fas fa-times-circle text-danger"></em>' : ($data->verifikasi_email == "Sudah" ? '<em class="fas fa-check-circle text-success"></em>' : '')); ?></td>
                 <td class="text-center"><?= ($data->status_akun == "Tidak Aktif" ? '<em class="fas fa-times-circle text-danger"></em>' : ($data->status_akun == "Aktif" ? '<em class="fas fa-check-circle text-success"></em>' : '')); ?></td>
                 <td><?= $data->username; ?></td>
                 <td><?= $data->password; ?></td>

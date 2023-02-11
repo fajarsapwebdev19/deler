@@ -29,8 +29,8 @@
                 <input type="text" name="nik" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="">Email</label>
-                <input type="email" name="email" class="form-control">
+                <label for="">Alamat</label>
+                <textarea name="alamat" class="form-control"></textarea>
             </div>
             <div class="mb-3">
                 <label for="">No Telp</label>

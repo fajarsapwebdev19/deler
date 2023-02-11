@@ -76,11 +76,9 @@ $data_user = mysqli_fetch_object($query);
                     Tenor Kredit
                 </label>
                 <select name="tenor" class="form-control tn">
-                    <option value="11">11 X</option>
-                    <option value="17">17 X</option>
-                    <option value="23">23 X</option>
-                    <option value="29">29 X</option>
-                    <option value="31">31 X</option>
+                   <option value="3">3 X</option>
+                   <option value="6">6 X</option>
+                   <option value="12">12 X</option>
                 </select>
             </div>
         </div>

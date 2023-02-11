@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2023 at 11:57 AM
+-- Generation Time: Feb 11, 2023 at 10:13 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -37,6 +37,13 @@ CREATE TABLE `bukti_transfer_cash` (
   `bukti` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `bukti_transfer_cash`
+--
+
+INSERT INTO `bukti_transfer_cash` (`id`, `id_transaksi`, `jumlah_bayar`, `keterangan`, `status_verifikasi`, `time_payment`, `bukti`) VALUES
+(1, 2, 12500000, 'Pembayaran Motor Cash', 'Terima', '2023-02-10 18:31:46', '938879277__Yamaha-Aerox-155-VVA-2018-tipe-Standart-Kuning2018.png');
+
 -- --------------------------------------------------------
 
 --
@@ -58,7 +65,7 @@ CREATE TABLE `bukti_transfer_kredit` (
 --
 
 INSERT INTO `bukti_transfer_kredit` (`id`, `id_transaksi`, `jumlah_bayar`, `keterangan`, `status_verifikasi`, `time_payment`, `bukti`) VALUES
-(1, 1, 2300000, 'Bayar Uang Muka', 'Antrian', '2023-02-09 17:09:51', '1478235525___WhatsApp Image 2023-01-19 at 16.10.50.jpg');
+(1, 2, 2300000, 'Bayar Uang Muka', 'Antrian', '2023-02-10 18:31:19', '1943983755___kwitansi_jualbeli_motor.png');
 
 -- --------------------------------------------------------
 
@@ -104,41 +111,41 @@ CREATE TABLE `motor` (
 --
 
 INSERT INTO `motor` (`id`, `id_merk`, `nama_motor`, `tahun`, `kondisi`, `harga`, `stok`, `foto`) VALUES
-(1, 1, 'Honda Beat Street 110 eSP', '2016', 'Baik', 10500000, 9, '1085755292___747px-Honda_Logo.png'),
-(2, 1, 'Honda Beat Street 110 eSP', '2017', 'Baik', 11500000, 10, '694578228___747px-Honda_Logo.png'),
-(3, 1, 'Honda Beat Street 110 eSP', '2018', 'Baik', 12500000, 10, '1700682239___747px-Honda_Logo.png'),
-(4, 1, 'Honda Beat Street 110 eSP', '2019', 'Baik', 13500000, 10, '1416750645___747px-Honda_Logo.png'),
-(5, 1, 'Honda All New Vario 150 eSP', '2017', 'Baik', 18000000, 10, '302201508___747px-Honda_Logo.png'),
-(6, 1, 'Honda All New Vario 150 eSP', '2018', 'Baik', 19000000, 10, '293574106___747px-Honda_Logo.png'),
-(7, 1, 'Honda PCX 150 CBU', '2014', 'Baik', 24700000, 10, '701593037___747px-Honda_Logo.png'),
-(8, 1, 'Honda PCX 150 CBU', '2015', 'Baik', 27600000, 10, '1045468586___747px-Honda_Logo.png'),
-(9, 1, 'Honda PCX 150 CBU', '2016', 'Baik', 28600000, 10, '195179870___747px-Honda_Logo.png'),
-(10, 1, 'Honda PCX 150 CBU', '2017', 'Baik', 29500000, 10, '1542755893___747px-Honda_Logo.png'),
-(11, 1, 'Honda PCX 150 ABS', '2018', 'Baik', 27500000, 10, '1536286238___747px-Honda_Logo.png'),
-(12, 3, 'Kawasaki Ninja 250 FI', '2014', 'Baik', 34000000, 10, '331443461___Kawasaki-logo.png'),
-(13, 3, 'Kawasaki Ninja 250 FI', '2015', 'Baik', 35000000, 10, '1027511986___Kawasaki-logo.png'),
-(14, 3, 'Kawasaki Ninja 250 FI', '2016', 'Baik', 39000000, 10, '1193251248___Kawasaki-logo.png'),
-(15, 3, 'Kawasaki Ninja 250 FI', '2017', 'Baik', 40000000, 10, '1295311786___Kawasaki-logo.png'),
-(16, 3, 'Kawasaki Ninja 250 FI', '2018', 'Baik', 42500000, 10, '192676198___Kawasaki-logo.png'),
-(17, 3, 'Kawasaki Ninja 250 ABS', '2014', 'Baik', 39800000, 10, '240040114___Kawasaki-logo.png'),
-(18, 3, 'Kawasaki Ninja 250 ABS', '2015', 'Baik', 40200000, 10, '812385594___Kawasaki-logo.png'),
-(19, 3, 'Kawasaki Ninja 250 ABS', '2016', 'Baik', 41600000, 10, '1169914618___Kawasaki-logo.png'),
-(20, 3, 'Kawasaki Ninja 250 ABS', '2017', 'Baik', 51700000, 10, '1109945289___Kawasaki-logo.png'),
-(21, 3, 'Kawasaki Ninja 250 ABS SE/LED', '2017', 'Baik', 47000000, 10, '1304061478___Kawasaki-logo.png'),
-(22, 4, 'Suzuki Satria FU 150', '2014', 'Baik', 10500000, 10, '1263266390___Suzuki-logo-625x768.png'),
-(23, 4, 'Suzuki Satria FU 150', '2015', 'Baik', 11400000, 10, '851524813___Suzuki-logo-625x768.png'),
-(24, 4, 'Suzuki Satria FU 150', '2017', 'Baik', 13000000, 10, '580181951___Suzuki-logo-625x768.png'),
-(25, 4, 'Suzuki Satria FU 150', '2018', 'Baik', 14000000, 10, '20539274___Suzuki-logo-625x768.png'),
-(26, 4, 'Suzuki GSX R 150', '2017', 'Baik', 16500000, 10, '382040649___Suzuki-logo-625x768.png'),
-(27, 4, 'Suzuki GSX 150 R', '2018', 'Baik', 18000000, 10, '624636875___Suzuki-logo-625x768.png'),
-(28, 4, 'Suzuki GSX 150 R', '2019', 'Baik', 19000000, 10, '1596415205___Suzuki-logo-625x768.png'),
-(29, 2, 'Yamaha Fino', '2014', 'Baik', 7400000, 10, '436441371___Yamaha-Logo-500x220.png'),
-(30, 2, 'Yamaha Fino', '2015', 'Baik', 8500000, 10, '1227269715___Yamaha-Logo-500x220.png'),
-(31, 2, 'Yamaha Fino', '2016', 'Baik', 9500000, 10, '1698439710___Yamaha-Logo-500x220.png'),
-(32, 2, 'Yamaha Fino', '2017', 'Baik', 10000000, 10, '1546260454___Yamaha-Logo-500x220.png'),
-(33, 2, 'Yamaha Fino', '2018', 'Baik', 11000000, 10, '232554911___Yamaha-Logo-500x220.png'),
-(34, 2, 'Yamaha Aerox 155', '2017', 'Baik', 18500000, 10, '1804495782___Yamaha-Logo-500x220.png'),
-(35, 2, 'Yamaha Aerox 155', '2018', 'Baik', 19000000, 10, '1815151418___Yamaha-Logo-500x220.png');
+(1, 1, 'Honda Beat Street 110 eSP', '2016', 'Baik', 10500000, 8, '366042720---beatstreet2016.png'),
+(2, 1, 'Honda Beat Street 110 eSP', '2017', 'Baik', 11500000, 10, '693015694---beatstreet2017.jpg'),
+(3, 1, 'Honda Beat Street 110 eSP', '2018', 'Baik', 12500000, 8, '688445136---baetstreet2018.jpg'),
+(4, 1, 'Honda Beat Street 110 eSP', '2019', 'Baik', 13500000, 10, '496498627---beatstreet2019.jpg'),
+(5, 1, 'Honda All New Vario 150 eSP', '2017', 'Baik', 18000000, 10, '1336381861---pilihan-warna-honda-vario-150-2017.jpg'),
+(6, 1, 'Honda All New Vario 150 eSP', '2018', 'Baik', 19000000, 10, '1252760967---honda2018.png'),
+(7, 1, 'Honda PCX 150 CBU', '2014', 'Baik', 24700000, 10, '1056060597---1882424112.jpeg'),
+(8, 1, 'Honda PCX 150 CBU', '2015', 'Baik', 27600000, 10, '673814765---2015pcx.jpg'),
+(9, 1, 'Honda PCX 150 CBU', '2016', 'Baik', 28600000, 10, '1653155766---pcx2016.jpg'),
+(10, 1, 'Honda PCX 150 CBU', '2017', 'Baik', 29500000, 10, '1815638331---pcx2017.png'),
+(11, 1, 'Honda PCX 150 ABS', '2018', 'Baik', 27500000, 10, '2064015991---pcx2018.jpg'),
+(12, 3, 'Kawasaki Ninja 250 FI', '2014', 'Baik', 34000000, 10, '1777006248---2014kwski250fi.png'),
+(13, 3, 'Kawasaki Ninja 250 FI', '2015', 'Baik', 35000000, 10, '1300880785---Harga-Ninja-250FI-2015-SE-Beet-Performance-Edition-terbaru.jpg'),
+(14, 3, 'Kawasaki Ninja 250 FI', '2016', 'Baik', 39000000, 10, '472093442---fu2016kawasaki.jpg'),
+(15, 3, 'Kawasaki Ninja 250 FI', '2017', 'Baik', 40000000, 10, '1171600702---2017-Kawasaki-Ninja-250-blue-003.jpg'),
+(16, 3, 'Kawasaki Ninja 250 FI', '2018', 'Baik', 42500000, 10, '1385033772---Warna-Baru-Kawasaki-Ninja-250-Fi-2018-KRT-Replica-3.jpg'),
+(17, 3, 'Kawasaki Ninja 250 ABS', '2014', 'Baik', 39800000, 10, '802591192---2014kwskin250abs.jpg'),
+(18, 3, 'Kawasaki Ninja 250 ABS', '2015', 'Baik', 40200000, 10, '247561543---2014kwskin250abs.jpg'),
+(19, 3, 'Kawasaki Ninja 250 ABS', '2016', 'Baik', 41600000, 10, '684879862---2014kwskin250abs.jpg'),
+(20, 3, 'Kawasaki Ninja 250 ABS', '2017', 'Baik', 51700000, 10, '882099845---2014kwskin250abs.jpg'),
+(21, 3, 'Kawasaki Ninja 250 ABS SE/LED', '2017', 'Baik', 47000000, 10, '1268595542---2017-Kawasaki-Ninja-250-ABS-SE-01.jpg'),
+(22, 4, 'Suzuki Satria FU 150', '2014', 'Baik', 10500000, 10, '1107626180---Satria-FU-2014-300x207.jpg'),
+(23, 4, 'Suzuki Satria FU 150', '2015', 'Baik', 11400000, 10, '1788780712---SatriaF150Fighter-2015.jpg'),
+(24, 4, 'Suzuki Satria FU 150', '2017', 'Baik', 13000000, 10, '1279985788---All New Satria F150 - 2017 - Brilliant White.jpg'),
+(25, 4, 'Suzuki Satria FU 150', '2018', 'Baik', 14000000, 10, '2007759719---Satria-2018-Warna-Kuning-BMSPEED7.jpg'),
+(26, 4, 'Suzuki GSX R 150', '2017', 'Baik', 16500000, 10, '548637785---pilihan-warna-suzuki-gsx-r150-2017-1.jpg'),
+(27, 4, 'Suzuki GSX 150 R', '2018', 'Baik', 18000000, 10, '69026883---2018szkigsx150.jpg'),
+(28, 4, 'Suzuki GSX 150 R', '2019', 'Baik', 19000000, 10, '1094579941---2019.png'),
+(29, 2, 'Yamaha Fino', '2014', 'Baik', 7400000, 10, '797427311---fino2014.jpg'),
+(30, 2, 'Yamaha Fino', '2015', 'Baik', 8500000, 10, '1103692934---yamaha-fino-sport-neo-white2015.jpg'),
+(31, 2, 'Yamaha Fino', '2016', 'Baik', 9500000, 10, '1542192976---yamaha-fino-125-2016-putih.jpeg'),
+(32, 2, 'Yamaha Fino', '2017', 'Baik', 10000000, 10, '1812844520---yamaha-Fino-125-2017-red-velvet.png'),
+(33, 2, 'Yamaha Fino', '2018', 'Baik', 11000000, 10, '1624407659---Pilihan-Warna-Fino-Sporty-Warna-Jump-White2018.jpg'),
+(34, 2, 'Yamaha Aerox 155', '2017', 'Baik', 18500000, 10, '2146568931---AEROX-155VVA-Matte-Blue-1024x9062017.jpg'),
+(35, 2, 'Yamaha Aerox 155', '2018', 'Baik', 19000000, 9, '63354352---Yamaha-Aerox-155-VVA-2018-tipe-Standart-Kuning2018.png');
 
 -- --------------------------------------------------------
 
@@ -148,7 +155,6 @@ INSERT INTO `motor` (`id`, `id_merk`, `nama_motor`, `tahun`, `kondisi`, `harga`,
 
 CREATE TABLE `pembayaran_tenor` (
   `id` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
   `id_transaksi` int(11) NOT NULL,
   `tenor` int(11) NOT NULL,
   `jatuh_tempo` int(11) NOT NULL,
@@ -169,8 +175,8 @@ CREATE TABLE `personal_data` (
   `id` int(11) NOT NULL,
   `nama` varchar(90) NOT NULL,
   `jenis_kelamin` enum('Laki-Laki','Perempuan') NOT NULL,
-  `nik` bigint(16) NOT NULL,
-  `email` varchar(300) NOT NULL,
+  `nik` char(16) NOT NULL,
+  `alamat` text NOT NULL,
   `no_telp` char(13) NOT NULL,
   `create_date` date DEFAULT NULL,
   `modified_date` date DEFAULT NULL
@@ -180,9 +186,9 @@ CREATE TABLE `personal_data` (
 -- Dumping data for table `personal_data`
 --
 
-INSERT INTO `personal_data` (`id`, `nama`, `jenis_kelamin`, `nik`, `email`, `no_telp`, `create_date`, `modified_date`) VALUES
-(1, 'Fajar Saputra', 'Laki-Laki', 3671762376372673, 'fajarsaputratkj3@gmail.com', '3287652387572', '2023-01-28', '0000-00-00'),
-(2, 'user', 'Laki-Laki', 367263872567452674, 'user@mail.com', '0889983789823', '2023-02-07', NULL);
+INSERT INTO `personal_data` (`id`, `nama`, `jenis_kelamin`, `nik`, `alamat`, `no_telp`, `create_date`, `modified_date`) VALUES
+(1, 'Fajar Saputra', 'Laki-Laki', '3671101912010003', 'Kedaung Wetan RT 02 RW 04', '081254199564', '2023-01-28', '0000-00-00'),
+(2, 'user', 'Laki-Laki', '3671234565654543', 'Rawa Rotan RT 02 RW 03', '0889983789823', '2023-02-07', NULL);
 
 -- --------------------------------------------------------
 
@@ -220,6 +226,15 @@ CREATE TABLE `transaksi_cash` (
   `status` enum('Paid','Unpaid') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `transaksi_cash`
+--
+
+INSERT INTO `transaksi_cash` (`id`, `id_user`, `id_motor`, `tanggal_pembelian`, `pembayaran`, `status`) VALUES
+(1, 2, 2, '2023-02-09 18:33:28', 'Tunai', 'Paid'),
+(2, 2, 3, '2023-02-10 18:31:46', 'Transfer', 'Paid'),
+(3, 2, 35, '2023-02-11 08:21:14', 'Tunai', 'Unpaid');
+
 -- --------------------------------------------------------
 
 --
@@ -244,7 +259,8 @@ CREATE TABLE `transaksi_kredit` (
 --
 
 INSERT INTO `transaksi_kredit` (`id`, `id_user`, `id_motor`, `uang_muka`, `tenor`, `uang_tenor`, `tanggal_beli`, `pembayaran`, `status`, `status_lunas`) VALUES
-(1, 2, 1, 2300000, 11, 0, '2023-02-09 17:09:51', 'Transfer', NULL, 'Belum');
+(1, 2, 3, 2300000, 6, NULL, '2023-02-09 22:32:32', 'Tunai', 'Antrian', 'Belum'),
+(2, 2, 1, 2300000, 6, NULL, '2023-02-10 18:31:19', 'Transfer', 'Antrian', 'Belum');
 
 -- --------------------------------------------------------
 
@@ -258,9 +274,7 @@ CREATE TABLE `user` (
   `role_id` int(11) DEFAULT NULL,
   `username` varchar(300) DEFAULT NULL,
   `password` varchar(300) DEFAULT NULL,
-  `verifikasi_email` enum('Sudah','Belum') DEFAULT NULL,
   `status_akun` enum('Aktif','Tidak Aktif') DEFAULT NULL,
-  `kode_aktivasi` bigint(11) DEFAULT NULL,
   `token` varchar(55) DEFAULT NULL,
   `on_status` enum('Online','Offline') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -269,9 +283,9 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `personal_id`, `role_id`, `username`, `password`, `verifikasi_email`, `status_akun`, `kode_aktivasi`, `token`, `on_status`) VALUES
-(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Sudah', 'Aktif', NULL, '1537015260130502892308022023', 'Online'),
-(2, 2, 2, 'user', 'user', 'Sudah', 'Aktif', NULL, '63175347178831184009022023', 'Online');
+INSERT INTO `user` (`id_user`, `personal_id`, `role_id`, `username`, `password`, `status_akun`, `token`, `on_status`) VALUES
+(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Aktif', '945189803102378999511022023', 'Online'),
+(2, 2, 2, 'user', 'user', 'Aktif', '45288968118915141311022023', 'Online');
 
 --
 -- Indexes for dumped tables
@@ -348,7 +362,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bukti_transfer_cash`
 --
 ALTER TABLE `bukti_transfer_cash`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `bukti_transfer_kredit`
@@ -390,13 +404,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `transaksi_cash`
 --
 ALTER TABLE `transaksi_cash`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `transaksi_kredit`
 --
 ALTER TABLE `transaksi_kredit`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`

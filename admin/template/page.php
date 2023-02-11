@@ -23,5 +23,13 @@
         case 'motor';
         require 'page/motor.php';
         break;
+
+        case 'tcash';
+        require 'page/tcash.php';
+        break;
+
+        case 'tkredit';
+        require 'page/tkredit.php';
+        break;
     }
 ?>

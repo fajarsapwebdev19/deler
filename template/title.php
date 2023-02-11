@@ -11,5 +11,9 @@
         case 'login';
         $title = "Login";
         break;
+
+        case 'register';
+        $title = "Register Account User";
+        break;
     }
 ?>

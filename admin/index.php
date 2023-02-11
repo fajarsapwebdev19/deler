@@ -583,6 +583,166 @@ if (empty($_SESSION['token'])) {
                 }
             });
         });
+
+        $('.motor').on('click', '.edit', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/ubah_motor.php',
+                data: {id:id},
+                type: 'post',
+                success:function(respond)
+                {
+                    $('#edit').modal('show');
+                    $('#edit-motor').html(respond);
+                }
+            });
+        });
+
+        $('#edit-motor').on('click', '.update', function(){
+            var f = $('#edit-motor')[0];
+            var data = new FormData(f);
+
+            $.ajax({
+                url: 'ajax/edit/motor.php',
+                data: data,
+                type: 'post',
+                cache: false,
+                processData: false,
+                contentType: false,
+                success:function(r)
+                {
+                    if(r == "success")
+                    {
+                        $('#message').show();
+                        $('#message').html("Berhasil Ubah Data !");
+                        $('#message').removeClass("alert alert-danger bg-danger text-white");
+                        $('#message').removeClass("alert alert-warning bg-warning text-dark");
+                        $('#message').addClass("alert alert-success bg-success text-white");
+                        $('#edit').modal('hide');
+                        $('.motor').load("ajax/data/motor.php");
+                        setTimeout(function(){
+                            $('#message').fadeOut('slow');
+                        }, 2000)
+                        $(window).scrollTop(0);
+                    }
+                    else if(r == "maxsize")
+                    {
+                        $('#msg').show();
+                        $('#msg').html("Ukuran File Anda Melebihi 3 MB");
+                        $('#msg').removeClass("alert alert-warning bg-warning text-dark");
+                        $('#msg').addClass("alert alert-danger bg-danger text-white");
+                        $('#msg').delay(5000).fadeOut('slow');
+                    }
+                    else if(r == "extensionnotallowed")
+                    {
+                        $('#msg').show();
+                        $('#msg').html("Ekstensi File Tidak Valid");
+                        $('#msg').removeClass("alert alert-danger bg-danger text-white");
+                        $('#msg').addClass("alert alert-warning bg-warning text-dark");
+                        $('#msg').delay(5000).fadeOut('slow');
+                    }
+                }
+            });
+        });
+
+        $('.tcash').load("ajax/data/tcash.php");
+
+        $('.tcash').on("click", ".verifikasi", function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/verifikasi_cash.php',
+                data: {id:id},
+                type: 'post',
+                success:function(r)
+                {
+                    $('#verifikasi').modal("show");
+                    $("#view").html(r);
+                }
+            });
+        });
+
+        // view bukti transfer pembayaran cash
+        $('#view').on('click', '.open', function(){
+            var id = $(this).data('id');
+
+            $.ajax({
+                url: 'ajax/method/method_view_bukti_cash.php',
+                data: {id:id},
+                type: 'post',
+                success:function(r)
+                {
+                    $('#view-bukti-cash').modal("show");
+                    $('#display-cash').html(r);
+                }
+            });
+        });
+
+        $('#view').on("click", ".terima", function(){
+            var id_transaksi = $('#idt').val();
+            var payment = $('#payment').val();
+            var data = "id="+id_transaksi+"&pembayaran="+payment+"&status="+"Terima";
+
+            $.ajax({
+                url: 'ajax/approve/pembelian_cash.php',
+                data: data,
+                type: 'post',
+                success:function(r)
+                {
+                    if(r == "success")
+                    {
+                        $('#message').show();
+                        $('#message').html("Berhasil! Terima Pengajuan Pembelian Secara Cash");
+                        $('#message').removeClass("alert-danger bg-danger text-white");
+                        $('#message').addClass("alert alert-success bg-success text-white");
+                        $('.tcash').load("ajax/data/tcash.php");
+                        $('#verifikasi').modal("hide");
+                        $('#message').delay(5000).fadeOut('slow');
+                        $(window).scrollTop(1500);
+                    }
+                }
+            });
+        });
+        
+        $('#view').on("click", ".tolak", function(){
+            var id_transaksi = $('#idt').val();
+            var payment = $('#payment').val();
+            var data = "id="+id_transaksi+"&pembayaran="+payment+"&status="+"Tolak";
+
+            $.ajax({
+                url: 'ajax/approve/pembelian_cash.php',
+                data: data,
+                type: 'post',
+                success:function(r)
+                {
+                    $('#message').show();
+                    $('#message').html("Berhasil! Tolak Pengajuan Pembelian Secara Cash");
+                    $('#message').removeClass("alert-danger bg-danger text-white");
+                    $('#message').addClass("alert alert-success bg-success text-white");
+                    $('.tcash').load("ajax/data/tcash.php");
+                    $('#verifikasi').modal("hide");
+                    $('#message').delay(5000).fadeOut('slow');
+                    $(window).scrollTop(1500);
+                }
+            });
+        });
+
+        $('.tkredit').load('ajax/data/tkredit.php');
+
+        $('.tkredit').on('click', '.verifikasi', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/verifikasi_kredit.php',
+                data: {id:id},
+                type: 'post',
+                success:function(r)
+                {
+                    $('#verifikasi_kredit').modal('show');
+                }
+            })
+        });
     </script>
 </body>
 

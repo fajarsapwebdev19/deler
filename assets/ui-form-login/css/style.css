@@ -1,11 +1,13 @@
 body {
 	margin:  0;
+	background-color: #5eb2b3;
+	margin-top: 10px;
 }
 .page-content {
-	height: 100vh;
+	margin: 0 auto;
+	padding-bottom: 10px;
 	width: 100%;
-	margin:  0 auto;
-	background: #5eb2b3;
+	background-color: #5eb2b3;
 	display: flex;
 	display: -webkit-flex;
 	justify-content: center;
@@ -155,7 +157,7 @@ input:-moz-placeholder { /* Firefox 18- */
 	padding: 20px;
 	background-color: #F92D45;
 	color:white;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 	font-size: 14px;
 	border-radius: 14px;
 	-webkit-border-radius: 14px;
@@ -169,7 +171,7 @@ input:-moz-placeholder { /* Firefox 18- */
 	padding: 20px;
 	background-color: #49A52C;
 	color: white;
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 	font-size: 14px;
 	border-radius: 14px;
 	-webkit-border-radius: 14px;
