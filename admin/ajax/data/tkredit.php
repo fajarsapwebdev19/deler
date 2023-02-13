@@ -46,7 +46,7 @@
                         <td><?= ($data->uang_tenor == NULL ? 'Belum Di Tentukan' : "Rp. ".number_format($data->uang_tenor, 0,',','.'))?></td>
                         <td><?= $data->pembayaran; ?></td>
                         <td><?= $data->status; ?></td>
-                        <td class="text-center"><button type="button" class="btn btn-success btn-sm verifikasi" data-id="<?= $data->id; ?>"><em class="fas fa-check"></em></button></td>
+                        <td class="text-center"><button type="button" class="btn btn-success btn-sm verifikasi" data-id="<?= $data->id; ?>" <?= ($data->status == "Terima" ? 'disabled' : '')?>><em class="fas fa-check"></em></button></td>
                     </tr>
                 <?php
             }

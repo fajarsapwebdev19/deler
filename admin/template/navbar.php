@@ -27,14 +27,20 @@
                         <li><a class="dropdown-item" href="?page=tkredit">Kredit</a></li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="?page=konf_kredit" class="nav-link">Konfirmasi Pembayaran Kredit</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pembayaran
+                        Laporan Penjualan
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Cash</a></li>
-                        <li><a class="dropdown-item" href="#">Kredit</a></li>
+                        <li><a class="dropdown-item" href="?page=rep_cash">Cash</a></li>
+                        <li><a class="dropdown-item" href="?page=rep_kredit">Kredit</a></li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="?page=profile" class="nav-link">Profile</a>
                 </li>
                 <li class="nav-item">
                     <a href="../logout.php" class="nav-link">Logout</a>

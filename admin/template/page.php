@@ -31,5 +31,13 @@
         case 'tkredit';
         require 'page/tkredit.php';
         break;
+
+        case 'konf_kredit';
+        require 'page/konf_kredit.php';
+        break;
+
+        case 'rep_cash';
+        require 'page/rep_cash.php';
+        break;
     }
 ?>

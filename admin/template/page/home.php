@@ -20,15 +20,15 @@
                         </a>
                     </div>
                     <div class="col-md-6 col-6 mb-3 text-center">
-                        <a href="" class="card">
+                        <a href="?page=tcash" class="card">
                             <div class="card-body">
                                 <h1 class="fas fa-money-bill-alt"></h1>
-                                <h5>Pembayaran</h5>
+                                <h5>Cash</h5>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-6 col-6 mb-3 text-center">
-                        <a href="" class="card">
+                        <a href="?page=tkredit" class="card">
                             <div class="card-body">
                                 <h1 class="fas fa-dollar-sign"></h1>
                                 <h5>Kredit</h5>

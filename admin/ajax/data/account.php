@@ -31,18 +31,18 @@
                         if($data->status_akun == "Aktif")
                         {
                             ?>
-                                <button class="btn btn-sm btn-danger mb-2 acnc" data-id="<?= $data->id_user; ?>"><em class="fas fa-times"></em></button>
+                                <button class="btn btn-sm btn-danger btn-sm mb-2 acnc" style="font-size:10px;" data-id="<?= $data->id_user; ?>"><em class="fas fa-times"></em></button>
                             <?php
                         }
                         else if($data->status_akun == "Tidak Aktif")
                         {
                             ?>
-                                <button class="btn btn-sm btn-success mb-2 acnc" data-id="<?= $data->id_user; ?>"><em class="fas fa-check"></em></button>
+                                <button class="btn btn-sm btn-success btn-sm mb-2 acnc" style="font-size:10px;" data-id="<?= $data->id_user; ?>"><em class="fas fa-check"></em></button>
                             <?php
                         }
                     ?>
-                    <button class="btn btn-sm btn-info edit mb-2" data-id="<?= $data->id; ?>"><em class="fas fa-edit text-white"></em></button>
-                    <button class="btn btn-sm btn-danger delete mb-2" data-id="<?= $data->id; ?>"><em class="fas fa-trash-alt"></em></button>
+                    <button class="btn btn-sm btn-info edit mb-2" style="font-size:10px;" data-id="<?= $data->id; ?>"><em class="fas fa-edit text-white"></em></button>
+                    <button class="btn btn-sm btn-danger delete mb-2" style="font-size:10px;" data-id="<?= $data->id; ?>"><em class="fas fa-trash-alt"></em></button>
                 </td>
             </tr>
         <?php

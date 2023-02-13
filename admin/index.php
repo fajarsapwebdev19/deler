@@ -35,6 +35,11 @@ if (empty($_SESSION['token'])) {
         margin: 0;
         }
 
+        #link-verifikasi:hover{
+            cursor: pointer;
+            color: rgba(0,0,0,0.3) !important;
+        }
+
     </style>
 </head>
 
@@ -740,9 +745,132 @@ if (empty($_SESSION['token'])) {
                 success:function(r)
                 {
                     $('#verifikasi_kredit').modal('show');
+                    $('#view-ver-kre').html(r);
+                }
+            });
+        });
+
+        $('#view-ver-kre').on('click', '.verifikasi', function(){
+            var sts = $('.sts:checked').val();
+
+            if(sts == undefined)
+            {
+                $('#msg').show();
+                $('#msg').html("Pilih Status Terlebih Dahulu");
+                $('#msg').addClass("alert alert-danger bg-danger text-white");
+                $('#msg').delay(5000).fadeOut('slow');
+            }else{
+                var uang_tenor = $('#uang_tenor').val();
+
+                if(uang_tenor == "")
+                {
+                    $('#msg').show();
+                    $('#msg').html("Masukan Uang Tenor !");
+                    $('#msg').addClass("alert alert-danger bg-danger text-white");
+                    $('#msg').delay(5000).fadeOut('slow');
+                }else{
+                    if(uang_tenor == undefined)
+                    {
+                        var uang_tenor = "";
+                    }
+                    var idt = $('#idt').val();
+                    var payment = $('#payment').val();
+                    var tenor = $('#tnr').val();
+
+                    var data = "status="+sts+"&uang_tenor="+uang_tenor+"&id="+idt+"&payment="+payment+"&tenor="+tenor;
+
+                    $.ajax({
+                        url: 'ajax/approve/pembelian_kredit.php',
+                        data: data,
+                        type: 'post',
+                        success:function(r)
+                        {
+                            if(r == "success")
+                            {
+                                $('#message').show();
+                                $('#message').html("Berhasil Verifikasi Pengajuan Kredit !");
+                                $('#message').removeClass("alert-danger bg-danger text-white");
+                                $('#message').addClass("alert alert-success bg-success text-white");
+                                $('#message').delay(5000).fadeOut('slow');
+                                $('.tkredit').load("ajax/data/tkredit.php");
+                                $('#verifikasi_kredit').modal('hide');
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $('#view-ver-kre').on('click', '.sts', function(){
+            var sts = $('.sts:checked').val();
+
+            if(sts == "Terima")
+            {
+                $('#tenor').show();
+                $('.utn').attr("id", "uang_tenor");
+            }
+            else{
+                $('#tenor').hide();
+                $('.utn').attr("id", "");
+            }
+        });
+
+        // view bukti transfer kredit
+        $('#view-ver-kre').on('click', '.view_trf', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/method_view_bukti_kredit.php',
+                data: {id:id},
+                type: 'post',
+                success:function(r)
+                {
+                    $('#view-bukti-kredit').modal("show");
+                    $('#display-kredit').html(r);
+                }
+            });
+        });
+
+        $('.k_tenor').load('ajax/data/ktenor.php');
+
+        $('.k_tenor').on('click', '.verifikasi', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/verifikasi_bayar_kredit.php',
+                data: {id:id},
+                type: "post",
+                success:function(r)
+                {
+                    $('#view-bayar-tenor').modal('show');
+                    $('#display-tenor').html(r);
                 }
             })
+        })
+
+        $('#display-tenor').on('click', '#link-verifikasi', function(){
+           var id = $(this).data('id');
+           $.ajax({
+                url: "ajax/method/verifikasi_tenor.php",
+                data: {id:id},
+                type: 'post',
+                success:function(r)
+                {
+                    $('#verif_tenor').modal('show');
+                    $('#view-verif').html(r);
+                }
+           });
         });
+
+        $('.rep-cash').on('click', '.print-invoice-cash', function(){
+            var id = $(this).data("id");
+            window.location.href="print/print_invoice_cash.php?id="+id;
+        });
+
+        $('.print-rep-cash').click(function(){
+            window.location.href="print/print_rep_cash.php";
+        })
+
     </script>
 </body>
 
