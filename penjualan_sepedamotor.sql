@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 11, 2023 at 10:13 AM
+-- Generation Time: Feb 13, 2023 at 06:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -65,7 +65,7 @@ CREATE TABLE `bukti_transfer_kredit` (
 --
 
 INSERT INTO `bukti_transfer_kredit` (`id`, `id_transaksi`, `jumlah_bayar`, `keterangan`, `status_verifikasi`, `time_payment`, `bukti`) VALUES
-(1, 2, 2300000, 'Bayar Uang Muka', 'Antrian', '2023-02-10 18:31:19', '1943983755___kwitansi_jualbeli_motor.png');
+(1, 2, 2300000, 'Bayar Uang Muka', 'Terima', '2023-02-10 18:31:19', '1943983755___kwitansi_jualbeli_motor.png');
 
 -- --------------------------------------------------------
 
@@ -155,15 +155,32 @@ INSERT INTO `motor` (`id`, `id_merk`, `nama_motor`, `tahun`, `kondisi`, `harga`,
 
 CREATE TABLE `pembayaran_tenor` (
   `id` int(11) NOT NULL,
-  `id_transaksi` int(11) NOT NULL,
-  `tenor` int(11) NOT NULL,
-  `jatuh_tempo` int(11) NOT NULL,
-  `uang_tenor` bigint(50) NOT NULL,
-  `pembayaran_ke` int(11) NOT NULL,
-  `sisa` int(11) NOT NULL,
-  `tanggal_bayar` date NOT NULL,
-  `status_bayar` enum('Sudah','Belum') NOT NULL
+  `id_transaksi` int(11) DEFAULT NULL,
+  `tenor` int(11) DEFAULT NULL,
+  `uang_tenor` bigint(50) DEFAULT NULL,
+  `pembayaran_ke` int(11) DEFAULT NULL,
+  `pembayaran` enum('Tunai','Transfer') DEFAULT NULL,
+  `tanggal_bayar` date DEFAULT NULL,
+  `status_bayar` enum('Sudah','Belum') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pembayaran_tenor`
+--
+
+INSERT INTO `pembayaran_tenor` (`id`, `id_transaksi`, `tenor`, `uang_tenor`, `pembayaran_ke`, `pembayaran`, `tanggal_bayar`, `status_bayar`) VALUES
+(1, 1, 6, 1700000, 1, '', NULL, 'Belum'),
+(2, 1, 6, 1700000, 2, '', NULL, 'Belum'),
+(3, 1, 6, 1700000, 3, '', NULL, 'Belum'),
+(4, 1, 6, 1700000, 4, '', NULL, 'Belum'),
+(5, 1, 6, 1700000, 5, '', NULL, 'Belum'),
+(6, 1, 6, 1700000, 6, '', NULL, 'Belum'),
+(7, 2, 6, 1700000, 1, '', NULL, 'Belum'),
+(8, 2, 6, 1700000, 2, '', NULL, 'Belum'),
+(9, 2, 6, 1700000, 3, '', NULL, 'Belum'),
+(10, 2, 6, 1700000, 4, '', NULL, 'Belum'),
+(11, 2, 6, 1700000, 5, '', NULL, 'Belum'),
+(12, 2, 6, 1700000, 6, '', NULL, 'Belum');
 
 -- --------------------------------------------------------
 
@@ -259,8 +276,8 @@ CREATE TABLE `transaksi_kredit` (
 --
 
 INSERT INTO `transaksi_kredit` (`id`, `id_user`, `id_motor`, `uang_muka`, `tenor`, `uang_tenor`, `tanggal_beli`, `pembayaran`, `status`, `status_lunas`) VALUES
-(1, 2, 3, 2300000, 6, NULL, '2023-02-09 22:32:32', 'Tunai', 'Antrian', 'Belum'),
-(2, 2, 1, 2300000, 6, NULL, '2023-02-10 18:31:19', 'Transfer', 'Antrian', 'Belum');
+(1, 2, 3, 2300000, 6, 1700000, '2023-02-09 22:32:32', 'Tunai', 'Terima', 'Belum'),
+(2, 2, 1, 2300000, 6, 1700000, '2023-02-10 18:31:19', 'Transfer', 'Terima', 'Belum');
 
 -- --------------------------------------------------------
 
@@ -284,7 +301,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `personal_id`, `role_id`, `username`, `password`, `status_akun`, `token`, `on_status`) VALUES
-(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Aktif', '945189803102378999511022023', 'Online'),
+(1, 1, 1, 'fajarsapwebdev19', 'Neglasarioke', 'Aktif', '208310344101821271513022023', 'Online'),
 (2, 2, 2, 'user', 'user', 'Aktif', '45288968118915141311022023', 'Online');
 
 --
@@ -386,7 +403,7 @@ ALTER TABLE `motor`
 -- AUTO_INCREMENT for table `pembayaran_tenor`
 --
 ALTER TABLE `pembayaran_tenor`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `personal_data`
