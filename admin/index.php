@@ -40,6 +40,10 @@ if (empty($_SESSION['token'])) {
             color: rgba(0,0,0,0.3) !important;
         }
 
+        .icon-sh:hover{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 
@@ -869,6 +873,170 @@ if (empty($_SESSION['token'])) {
 
         $('.print-rep-cash').click(function(){
             window.location.href="print/print_rep_cash.php";
+        })
+
+        $('#frm-profile').load("ajax/method/update-profile.php");
+        
+        $('#frm-profile').on('click', '.ubah-data', function(){
+            var data =  $('#frm-profile').serialize();
+
+            $.ajax({
+                url: "ajax/edit/profile.php",
+                data: data,
+                type: "post",
+                success:function(r)
+                {
+                    if(r == "kosong")
+                    {
+                        $("#message").show();
+                        $("#message").removeClass("alert-success bg-success text-white");
+                        $("#message").addClass("alert alert-danger bg-danger text-white");
+                        $("#message").html("Jangan Ada Yang Kosong !");
+                        $('#message').delay(5000).fadeOut('slow');
+                    }else if(r == "sukses")
+                    {
+                        $("#message").show();
+                        $("#message").removeClass("alert-danger bg-danger text-white");
+                        $("#message").addClass("alert alert-success bg-success text-white");
+                        $("#message").html("Berhasil Ubah Data !");
+                        $('#message').delay(5000).fadeOut('slow');
+                        $('#frm-profile').load("ajax/method/update-profile.php");
+                        $(window).scrollTop(0);
+                    }
+                }
+            })
+        })
+
+        $('#update-pass').on('click', function(){
+            var id = $(this).data("id");
+
+            $.ajax({
+                url: 'ajax/method/update-password.php',
+                data: {id:id},
+                type: 'post',
+                success:function(r)
+                {
+                    $('#up-pass').modal('show');
+                    $('#up-psw').html(r);
+                }
+            })
+        })
+
+        $('#up-psw').on('click', '.pl', function(){
+            var paslam = $('.pwl').attr('type');
+
+            if(paslam === "password")
+            {
+                $('.pwl').attr("type", "text");
+                $('#icon-pw-lm').removeClass("fa-eye");
+                $('#icon-pw-lm').addClass("fa-eye-slash");
+            }else{
+                $('.pwl').attr("type", "password");
+                $('#icon-pw-lm').removeClass("fa-eye-slash");
+                $('#icon-pw-lm').addClass("fa-eye");
+            }
+        });
+
+        $('#up-psw').on('click', '.pb', function(){
+            var pasbar = $('.pwb').attr("type");
+
+            if(pasbar === "password")
+            {
+                $('.pwb').attr("type", "text");
+                $('#icon-pw-br').removeClass("fa-eye");
+                $('#icon-pw-br').addClass("fa-eye-slash");
+            }else{
+                $('.pwb').attr("type", "password");
+                $('#icon-pw-br').removeClass("fa-eye-slash");
+                $('#icon-pw-br').addClass("fa-eye");
+            }
+        });
+
+        $('#up-psw').on('click', '.kpb', function(){
+            var konpasbar = $('.kpwb').attr("type");
+
+            if(konpasbar === "password")
+            {
+                $('.kpwb').attr("type", "text");
+                $('#icon-kn-pw').removeClass("fa-eye");
+                $('#icon-kn-pw').addClass("fa-eye-slash");
+            }else{
+                $('.kpwb').attr("type", "password");
+                $('#icon-kn-pw').removeClass("fa-eye-slash");
+                $('#icon-kn-pw').addClass("fa-eye");
+            }
+        });
+
+        $('#up-psw').on('click', '.up-pass', function(){
+            var id_user = $('#id_user').val();
+            var pass_lama = $('.pwl').val();
+            var pass_baru = $('.pwb').val();
+            var kon_pass_baru = $('.kpwb').val();
+
+            if(pass_lama == "")
+            {
+                $("#msg").show();
+                $("#msg").removeClass("alert-success bg-success text-white");
+                $("#msg").addClass("alert alert-danger bg-danger text-white");
+                $("#msg").html("Password Lama Kosong");
+                $('#msg').delay(5000).fadeOut('slow');
+            }else{
+                if(pass_baru == "")
+                {
+                    $("#msg").show();
+                    $("#msg").removeClass("alert-success bg-success text-white");
+                    $("#msg").addClass("alert alert-danger bg-danger text-white");
+                    $("#msg").html("Password Baru Kosong");
+                    $('#msg').delay(5000).fadeOut('slow');
+                }
+                else{
+                    if(kon_pass_baru == "")
+                    {
+                        $("#msg").show();
+                        $("#msg").removeClass("alert-success bg-success text-white");
+                        $("#msg").addClass("alert alert-danger bg-danger text-white");
+                        $("#msg").html("Konfirmasi Password Baru Kosong");
+                        $('#msg').delay(5000).fadeOut('slow');
+                    }else{
+                        if(pass_baru != kon_pass_baru)
+                        {
+                            $("#msg").show();
+                            $("#msg").removeClass("alert-success bg-success text-white");
+                            $("#msg").addClass("alert alert-danger bg-danger text-white");
+                            $("#msg").html("Konfimasi Password Baru Tidak Sama");
+                            $('#msg').delay(5000).fadeOut('slow');
+                        }else{
+                            var data = "id="+id_user+"&passlama="+pass_lama+"&passbaru="+pass_baru+"&konpassbaru="+kon_pass_baru;
+
+                            $.ajax({
+                                url: 'ajax/edit/password.php',
+                                data: data,
+                                type: "post",
+                                success:function(r)
+                                {
+                                    if(r == "passlamainvalid")
+                                    {
+                                        $("#msg").show();
+                                        $("#msg").removeClass("alert-success bg-success text-white");
+                                        $("#msg").addClass("alert alert-danger bg-danger text-white");
+                                        $("#msg").html("Password Lama Salah");
+                                        $('#msg').delay(5000).fadeOut('slow');
+                                    }else if(r == "sukses")
+                                    {
+                                        $("#message").show();
+                                        $("#message").removeClass("alert-danger bg-danger text-white");
+                                        $("#message").addClass("alert alert-success bg-success text-white");
+                                        $("#message").html("Berhasil Ubah Password");
+                                        $('#message').delay(5000).fadeOut('slow');
+                                        $('#up-pass').modal('hide');
+                                        $('#up-psw')[0].reset;
+                                    }
+                                }
+                            })
+                        }
+                    }
+                }
+            }
         })
 
     </script>

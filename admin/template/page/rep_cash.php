@@ -5,7 +5,7 @@
     </button>
 
     <div class="table-responsive mt-2">
-        <table class="table table-striped table-sm rep-cash" style="font-size: 8px;">
+        <table class="table table-striped table-sm rep-cash" style="font-size:14px;">
             <thead>
                 <tr>
                     <th>Tanggal Pembelian</th>

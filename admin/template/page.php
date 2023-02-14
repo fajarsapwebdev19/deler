@@ -39,5 +39,13 @@
         case 'rep_cash';
         require 'page/rep_cash.php';
         break;
+
+        case 'rep_kredit';
+        require 'page/rep_kredit.php';
+        break;
+
+        case 'profile';
+        require 'page/profile.php';
+        break;
     }
 ?>

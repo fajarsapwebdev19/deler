@@ -8,7 +8,7 @@
 
         <div class="card mt-2">
             <div class="card-body">
-                <div class="table-responsive account data" style="font-size:10px;">
+                <div class="table-responsive account data" style="font-size:14px;">
                     
                 </div>
             </div>

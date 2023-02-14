@@ -1,7 +1,7 @@
 <div class="container-fluid mt-5">
     <div id="message"></div>
 
-    <div class="k_tenor table-responsive">
+    <div class="k_tenor table-responsive" style="font-size:14px;">
 
     </div>
 </div>
