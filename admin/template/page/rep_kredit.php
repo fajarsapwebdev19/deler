@@ -1,5 +1,5 @@
 <div class="container-fluid mt-4">
-    <h5>Laporan Pembelian Cash</h5>
+    <h5>Laporan Pembelian Kredit</h5>
     <button class="btn btn-danger btn-sm print-rep-kredit">
         <em class="fas fa-download"></em> Download Laporan
     </button>
@@ -20,7 +20,7 @@
             </thead>
             <tbody>
                 <?php
-                    $sql = mysqli_query($con, "SELECT tk.id, tk.tanggal_beli,tk.uang_muka, pd.nama, m.nama_motor, m.tahun, m.harga, tk.tenor, tk.status_lunas FROM transaksi_kredit tk JOIN motor m ON tk.id_motor = m.id JOIN user u ON tk.id_user = u.id_user JOIN personal_data pd ON u.personal_id = pd.id ORDER BY tk.status_lunas DESC");
+                    $sql = mysqli_query($con, "SELECT tk.id, tk.tanggal_beli,tk.uang_muka, pd.nama, m.nama_motor, m.tahun, m.harga, tk.tenor, tk.status_lunas FROM transaksi_kredit tk JOIN motor m ON tk.id_motor = m.id JOIN user u ON tk.id_user = u.id_user JOIN personal_data pd ON u.personal_id = pd.id WHERE tk.status='Terima' ORDER BY tk.status_lunas DESC");
                     
                     
                     while($data = mysqli_fetch_object($sql))

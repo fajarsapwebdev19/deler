@@ -196,7 +196,7 @@
                         $(window).scrollTop('slow');
                     }else{
                         $('#pesan').show();
-                        $('#pesan').html("Berhasil ! Silahkan Cek Email Untuk Aktivasi Akun Anda");
+                        $('#pesan').html("Berhasil ! Silahkan Info Admin Untuk Aktivasi Akun Anda");
                         $('#pesan').removeClass("alert-danger bg-danger text-white");
                         $('#pesan').addClass("alert alert-success bg-success text-white");
                         $('#pesan').delay(5000).fadeOut('slow');

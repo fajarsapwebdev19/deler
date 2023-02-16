@@ -868,12 +868,16 @@ if (empty($_SESSION['token'])) {
 
         $('.rep-cash').on('click', '.print-invoice-cash', function(){
             var id = $(this).data("id");
-            window.location.href="print/print_invoice_cash.php?id="+id;
+            window.open('print/print_invoice_cash.php?id='+id, '_blank');
         });
 
         $('.print-rep-cash').click(function(){
-            window.location.href="print/print_rep_cash.php";
-        })
+            window.open('print/print_rep_cash.php', '_blank');
+        });
+
+        $('.print-rep-kredit').click(function(){
+            window.open('print/print_rep_kredit.php', '_blank');
+        });
 
         $('#frm-profile').load("ajax/method/update-profile.php");
         
