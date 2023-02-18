@@ -36,6 +36,7 @@
             while($data = mysqli_fetch_object($sql))
             {
                 ?>
+                
                     <tr>
                         <td><?= $no++; ?></td>
                         <td><?= $data->nama; ?></td>

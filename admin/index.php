@@ -11,6 +11,16 @@ if (empty($_SESSION['token'])) {
     $query = mysqli_query($con, "SELECT * FROM user JOIN personal_data ON user.personal_id = personal_data.id JOIN role ON user.role_id = role.id WHERE user.username='$username'");
 
     $data = mysqli_fetch_object($query);
+
+    if($data->role_id != 1)
+    {
+        ?>
+            <script>
+                alert("Anda Bukan Admin");
+                window.location='../customer/';
+            </script>
+        <?php
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -486,7 +496,6 @@ if (empty($_SESSION['token'])) {
 
         $('.tambah').on('click', function(){
             $('#tambah').modal('show');
-            
         });
 
         $('#tambah-motor').on('click', '.tambah', function(){
@@ -866,19 +875,29 @@ if (empty($_SESSION['token'])) {
            });
         });
 
+        // button download and print report cash
         $('.rep-cash').on('click', '.print-invoice-cash', function(){
             var id = $(this).data("id");
             window.open('print/print_invoice_cash.php?id='+id, '_blank');
         });
 
+        // button print invoice cash
         $('.print-rep-cash').click(function(){
             window.open('print/print_rep_cash.php', '_blank');
         });
 
+        // button download and print report kredit
         $('.print-rep-kredit').click(function(){
             window.open('print/print_rep_kredit.php', '_blank');
         });
 
+        // button print invoice kredit
+        $('.rep-kredit').on('click', '.print-invoice-kredit', function(){
+            var id = $(this).data("id");
+            window.open('print/print_invoice_kredit.php?id='+id, '_blank');
+        })
+
+        // view data profile
         $('#frm-profile').load("ajax/method/update-profile.php");
         
         $('#frm-profile').on('click', '.ubah-data', function(){
@@ -1041,6 +1060,62 @@ if (empty($_SESSION['token'])) {
                     }
                 }
             }
+        })
+
+        $('#view-verif').on('click', '.terima', function(){
+            var id_transaksi = $('#idt').val();
+            var pembayaran_ke = $('#pembayaran-ke').val();
+            var method_pay = $('#pembayaran').val();
+            var status = "Terima";
+            var data = "id="+id_transaksi+"&pembayaran_ke="+pembayaran_ke+"&payment="+method_pay+"&status="+status;
+
+            $.ajax({
+                url: 'ajax/approve/payment_tenor.php',
+                data: data,
+                type: 'post',
+                success:function(response)
+                {
+                    if(response == "oke")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert-danger bg-danger text-white");
+                        $('#message').addClass("alert alert-success bg-success text-white");
+                        $('#message').html("Berhasil Konfirmasi Pembayaran Tenor");
+                        $('#message').delay(5000).fadeOut('slow');
+                        $('#view-bayar-tenor').modal("hide");
+                        $('#verif_tenor').modal("hide");
+                        $('tkredit').load('ajax/data/tkredit.php');
+                    }
+                }
+            })
+        })
+
+        $('#view-verif').on('click', '.tolak', function(){
+            var id_transaksi = $('#idt').val();
+            var pembayaran_ke = $('#pembayaran-ke').val();
+            var method_pay = $('#pembayaran').val();
+            var status = "Tolak";
+            var data = "id="+id_transaksi+"&pembayaran_ke="+pembayaran_ke+"&payment="+method_pay+"&status="+status;
+
+            $.ajax({
+                url: 'ajax/approve/payment_tenor.php',
+                data: data,
+                type: 'post',
+                success:function(response)
+                {
+                    if(response == "oke")
+                    {
+                        $('#message').show();
+                        $('#message').removeClass("alert-danger bg-danger text-white");
+                        $('#message').addClass("alert alert-success bg-success text-white");
+                        $('#message').html("Berhasil Konfirmasi Pembayaran Tenor");
+                        $('#message').delay(5000).fadeOut('slow');
+                        $('#view-bayar-tenor').modal("hide");
+                        $('#verif_tenor').modal("hide");
+                        $('tkredit').load('ajax/data/tkredit.php');
+                    }
+                }
+            })
         })
 
     </script>

@@ -19,5 +19,9 @@
         case 'tkredit';
         require 'page/tkredit.php';
         break;
+
+        case 'profile';
+        require 'page/profile.php';
+        break;
     }
 ?>

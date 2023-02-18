@@ -41,7 +41,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="">Jumlah Bayar</label>
-                    <input type="text" class="form-control" value="<?= $tn->uang_tenor; ?>" disabled>
+                    <input type="text" class="form-control" value="<?= ($tn->uang_tenor == NULL ? '' : "Rp. ".number_format($tn->uang_tenor, 0,',','.')); ?>" disabled>
+                    <input type="hidden" id="idt" value="<?= $tn->id_transaksi; ?>">
+                    <input type="hidden" id="pembayaran-ke" value="<?= $tn->pembayaran_ke; ?>">
+                    <input type="hidden" id="pembayaran" value="<?= $tn->pembayaran; ?>">
                 </div>
                 <?php
                     if($tn->pembayaran == "Transfer")
@@ -51,8 +54,7 @@
                                 <label for="">Bukti</label>
                                 <?php
                                     $idt = $tn->id_transaksi;
-                                    $pay = "Pembayaran Tenor Ke".$tn->pembayaran_ke;
-                                    $b = mysqli_query($con, "SELECT bukti FROM bukti_transfer_kredit WHERE id_transaksi='$idt' AND keterangan='$pay'");
+                                    $b = mysqli_query($con, "SELECT bukti FROM bukti_transfer_tenor WHERE id_transaksi='$idt'");
                                     $bkt = mysqli_fetch_object($b);
                                 ?>
                                 <div class="mb-3">

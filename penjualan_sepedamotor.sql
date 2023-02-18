@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2023 at 02:57 PM
+-- Generation Time: Feb 18, 2023 at 02:35 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 7.4.33
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -66,6 +66,27 @@ CREATE TABLE `bukti_transfer_kredit` (
 
 INSERT INTO `bukti_transfer_kredit` (`id`, `id_transaksi`, `jumlah_bayar`, `keterangan`, `status_verifikasi`, `time_payment`, `bukti`) VALUES
 (1, 2, 2300000, 'Bayar Uang Muka', 'Terima', '2023-02-10 18:31:19', '1943983755___kwitansi_jualbeli_motor.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bukti_transfer_tenor`
+--
+
+CREATE TABLE `bukti_transfer_tenor` (
+  `id` int(11) NOT NULL,
+  `id_transaksi` int(11) DEFAULT NULL,
+  `pembayaran_ke` int(11) DEFAULT NULL,
+  `bukti` text DEFAULT NULL,
+  `status` enum('Antrian','Terima','Tolak') DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bukti_transfer_tenor`
+--
+
+INSERT INTO `bukti_transfer_tenor` (`id`, `id_transaksi`, `pembayaran_ke`, `bukti`, `status`) VALUES
+(1, 1, 3, '1467481989180220230844th9960Screenshot 2022-12-25 103606.png', 'Terima');
 
 -- --------------------------------------------------------
 
@@ -169,15 +190,15 @@ CREATE TABLE `pembayaran_tenor` (
 --
 
 INSERT INTO `pembayaran_tenor` (`id`, `id_transaksi`, `tenor`, `uang_tenor`, `pembayaran_ke`, `pembayaran`, `tanggal_bayar`, `status_bayar`) VALUES
-(1, 1, 6, 1700000, 1, '', NULL, 'Belum'),
-(2, 1, 6, 1700000, 2, '', NULL, 'Belum'),
-(3, 1, 6, 1700000, 3, '', NULL, 'Belum'),
-(4, 1, 6, 1700000, 4, '', NULL, 'Belum'),
-(5, 1, 6, 1700000, 5, '', NULL, 'Belum'),
-(6, 1, 6, 1700000, 6, '', NULL, 'Belum'),
-(7, 2, 6, 1700000, 1, '', NULL, 'Belum'),
-(8, 2, 6, 1700000, 2, '', NULL, 'Belum'),
-(9, 2, 6, 1700000, 3, '', NULL, 'Belum'),
+(1, 1, 6, 1700000, 1, 'Tunai', '2023-02-18', 'Sudah'),
+(2, 1, 6, 1700000, 2, 'Tunai', '2023-02-18', 'Sudah'),
+(3, 1, 6, 1700000, 3, 'Transfer', '2023-02-18', 'Sudah'),
+(4, 1, 6, 1700000, 4, 'Tunai', '2023-02-18', 'Sudah'),
+(5, 1, 6, 1700000, 5, 'Tunai', '2023-02-18', 'Sudah'),
+(6, 1, 6, 1700000, 6, 'Tunai', '2023-02-18', 'Sudah'),
+(7, 2, 6, 1700000, 1, 'Tunai', '2023-02-18', 'Sudah'),
+(8, 2, 6, 1700000, 2, 'Tunai', '2023-02-18', 'Sudah'),
+(9, 2, 6, 1700000, 3, 'Tunai', '2023-02-18', 'Belum'),
 (10, 2, 6, 1700000, 4, '', NULL, 'Belum'),
 (11, 2, 6, 1700000, 5, '', NULL, 'Belum'),
 (12, 2, 6, 1700000, 6, '', NULL, 'Belum');
@@ -276,7 +297,7 @@ CREATE TABLE `transaksi_kredit` (
 --
 
 INSERT INTO `transaksi_kredit` (`id`, `id_user`, `id_motor`, `uang_muka`, `tenor`, `uang_tenor`, `tanggal_beli`, `pembayaran`, `status`, `status_lunas`) VALUES
-(1, 2, 3, 2300000, 6, 1700000, '2023-02-09 22:32:32', 'Tunai', 'Terima', 'Belum'),
+(1, 2, 3, 2300000, 6, 1700000, '2023-02-09 22:32:32', 'Tunai', 'Terima', 'Lunas'),
 (2, 2, 1, 2300000, 6, 1700000, '2023-02-10 18:31:19', 'Transfer', 'Terima', 'Belum');
 
 -- --------------------------------------------------------
@@ -301,8 +322,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `personal_id`, `role_id`, `username`, `password`, `status_akun`, `token`, `on_status`) VALUES
-(1, 1, 1, 'fajarsapwebdev19', 'Neglasari@@1207', 'Aktif', '1625486074118143725316022023', 'Online'),
-(2, 2, 2, 'user', 'user', 'Aktif', '45288968118915141311022023', 'Online');
+(1, 1, 1, 'fajarsapwebdev19', 'Neglasari@@1207', 'Aktif', '12910412516770319418022023', 'Online'),
+(2, 2, 2, 'user', 'user', 'Aktif', '93869448137887121218022023', 'Online');
 
 --
 -- Indexes for dumped tables
@@ -318,6 +339,12 @@ ALTER TABLE `bukti_transfer_cash`
 -- Indexes for table `bukti_transfer_kredit`
 --
 ALTER TABLE `bukti_transfer_kredit`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bukti_transfer_tenor`
+--
+ALTER TABLE `bukti_transfer_tenor`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -385,6 +412,12 @@ ALTER TABLE `bukti_transfer_cash`
 -- AUTO_INCREMENT for table `bukti_transfer_kredit`
 --
 ALTER TABLE `bukti_transfer_kredit`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `bukti_transfer_tenor`
+--
+ALTER TABLE `bukti_transfer_tenor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --

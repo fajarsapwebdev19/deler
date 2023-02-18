@@ -1,5 +1,5 @@
 <?php
-    require '../../../database_connect.php';
+    require '../../database_connect.php';
     $id = mysqli_real_escape_string($con, $_POST['id']);
 
     $sql = mysqli_query($con, "SELECT 
@@ -64,7 +64,7 @@
             while($t = mysqli_fetch_object($tn))
             {
                 ?>
-                    <tr id="<?= ($t->status_bayar == "Sudah" ? ' ' : 'link-verifikasi')?>" class="<?= ($t->status_bayar == "Sudah" ? 'bg-success text-white' : 'bg-danger text-white')?>" data-id="<?= $t->id; ?>">
+                    <tr id="<?= $t->pembayaran == NULL ? 'pay-kredit' : ''?>" class="<?= ($t->status_bayar == "Sudah" ? 'bg-success text-white' : 'bg-danger text-white')?>" data-id="<?= $t->id; ?>">
                         <td class="text-center"><?= $t->pembayaran_ke?></td>
                         <td class="text-center"><?= ($t->uang_tenor == NULL ? '' : "Rp. ".number_format($t->uang_tenor, 0,',','.'))?></td>
                         <td class="text-center"><?= ($t->pembayaran == NULL ? 'belum bayar' : $t->pembayaran ) ?></td>

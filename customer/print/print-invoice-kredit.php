@@ -19,14 +19,14 @@ if(isset($_GET['id']))
 {
     $id = mysqli_real_escape_string($con, $_GET['id']);
 
-    $sql = mysqli_query($con, "SELECT * FROM transaksi_cash tc JOIN motor m ON tc.id_motor = m.id JOIN user u ON tc.id_user = u.id_user JOIN personal_data pd ON u.personal_id = pd.id WHERE tc.id='$id'");
+    $sql = mysqli_query($con, "SELECT * FROM transaksi_kredit tk JOIN motor m ON tk.id_motor = m.id JOIN user u ON tk.id_user = u.id_user JOIN personal_data pd ON u.personal_id = pd.id WHERE tk.id='$id'");
 
     $data = mysqli_fetch_object($sql);
 }
 ?>
     <html>
     <head>
-        <title>Invoice Cash <?= $data->nama; ?> - <?= $data->nama_motor; ?> <?= ($data->tanggal_pembelian == NULL ? "" : date('d-m-Y', strtotime($data->tanggal_pembelian)))?></title>
+        <title>Invoice Kredit <?= $data->nama; ?> - <?= $data->nama_motor; ?> <?= ($data->tanggal_beli == NULL ? "" : date('d-m-Y', strtotime($data->tanggal_beli)))?></title>
     </head>
     <style>
         
@@ -51,6 +51,25 @@ if(isset($_GET['id']))
         .detail{
             height: 150px;
             padding-left: 30px;
+        }
+
+        .tenor-payment {
+            background: #fff;
+            margin-left: 38px;
+            border: 1px solid #000;
+            width: 90%;
+            border-collapse: collapse;
+            font-size: 16px;
+            font-family: arial,sans-serif;
+        }
+
+        .tenor-payment,th{
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .tenor-payment td {
+            border: 1px solid #000;
         }
 
         .label{
@@ -92,7 +111,7 @@ if(isset($_GET['id']))
                     </td>
                 </tr>
                 <tr>
-                    <td>Invoice</td>
+                    <td>Invoice Pembelian Sepeda Motor Bekas (Kredit)</td>
                     <tr>
                         <td>WR MOTOR MAUK TANGERANG</td>
                         <tr>
@@ -125,15 +144,54 @@ if(isset($_GET['id']))
                     <td style="text-align: left; "><?= $data->tahun; ?></td>
                 </tr>
                 <tr>
+                    <th width="15%" style="text-align:left;">Uang Muka</th>
+                    <th width="2%">:</th>
+                    <td style="text-align: left; "><?= ($data->uang_muka == NULL ? '' : "Rp. ".number_format($data->uang_muka, 0,',','.')); ?></td>
+                </tr>
+                <tr>
+                    <th width="15%" style="text-align:left;">Tenor</th>
+                    <th width="2%">:</th>
+                    <td style="text-align: left; "><?= $data->tenor; ?> X</td>
+                </tr>
+                <tr>
                     <th width="15%" style="text-align:left;">Tanggal Pembelian</th>
                     <th width="2%">:</th>
-                    <td style="text-align: left; "><?= ($data->tanggal_pembelian == NULL ? "" : date('d-m-Y', strtotime($data->tanggal_pembelian)))?></td>
+                    <td style="text-align: left; "><?= ($data->tanggal_beli == NULL ? "" : date('d-m-Y', strtotime($data->tanggal_beli)))?></td>
                 </tr>
                 <tr>
                     <th width="15%" style="text-align:left;">Pembayaran</th>
                     <th width="2%">:</th>
                     <td style="text-align: left; "><?= $data->pembayaran; ?></td>
                 </tr>
+            </table>
+            
+            <table class="tenor-payment">
+                <thead>
+                    <tr>
+                        <td>Pembayaran Ke</td>
+                        <td>Uang Tenor</td>
+                        <td>Tgl Bayar</td>
+                        <td>Pembayaran Via</td>
+                        <td>Status</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $tenor = mysqli_query($con, "SELECT * FROM pembayaran_tenor WHERE id_transaksi='$id'");
+                        while($dt = mysqli_fetch_object($tenor))
+                        {
+                            ?>
+                                <tr>
+                                    <td><?= $dt->pembayaran_ke; ?></td>
+                                    <td><?= ($dt->uang_tenor == NULL ? '' : "Rp. ".number_format($dt->uang_tenor, 0,',','.')); ?></td>
+                                    <td><?= ($dt->tanggal_bayar == NULL ? '' : date('d-m-Y', strtotime($dt->tanggal_bayar))); ?></td>
+                                    <td><?= $dt->pembayaran; ?></td>
+                                    <td><?= $dt->status_bayar; ?></td>
+                                </tr>
+                            <?php
+                        }
+                    ?>
+                </tbody>
             </table>
 
             <table class="label" border="0" width="90%">
@@ -145,7 +203,7 @@ if(isset($_GET['id']))
                     </td>
                     <td style="text-align: center;">
                         <span class="kotak-price text-center">
-                            LUNAS
+                            <?= ($data->status_lunas == "Belum" ? 'Belum' : ''). "Lunas"; ?>
                         </span>
                     </td>
                 </tr>
@@ -161,7 +219,7 @@ ob_end_clean();
 
 $dom->setPaper('A4', 'portrat');
 $dom->render();
-$tanggal = $data->tanggal_pembelian == NULL ? '' : date('d-m-Y', strtotime($data->tanggal_pembelian));
-$title = "Invoice Cash {$data->nama} - {$data->nama_motor} {$tanggal}.pdf";
+$tanggal = $data->tanggal_beli == NULL ? '' : date('d-m-Y', strtotime($data->tanggal_beli));
+$title = "Invoice Kredit {$data->nama} - {$data->nama_motor} {$tanggal}.pdf";
 $dom->stream($title, array("Attachment" => false));
 ?>

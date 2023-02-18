@@ -72,7 +72,7 @@ $dom = new Dompdf($options);
             </td>
         </tr>
         <tr>
-            <td>Laporan Pembelian Sepeda Motor Bekas Secara Cash</td>
+            <td>Laporan Pembelian Sepeda Motor Bekas Secara Kredit</td>
         <tr>
             <td>WR MOTOR MAUK TANGERANG</td>
         <tr>
@@ -90,7 +90,8 @@ $dom = new Dompdf($options);
                 <th>Nama Pemilik</th>
                 <th>Tipe Motor</th>
                 <th>Harga</th>
-                <th>Pembayaran Via</th>
+                <th>Uang Muka</th>
+                <th>Tenor</th>
                 <th>Status</th>
             </tr>
         </thead>
@@ -98,19 +99,20 @@ $dom = new Dompdf($options);
             <?php
                 require '../../database_connect.php';
 
-                $sql = mysqli_query($con, "SELECT pd.nama,m.nama_motor,m.tahun,m.harga,tc.pembayaran, tc.tanggal_pembelian, tc.status FROM transaksi_cash tc JOIN motor m ON tc.id_motor = m.id JOIN user u ON tc.id_user = u.id_user JOIN personal_data pd ON u.personal_id = pd.id WHERE tc.status='Paid';
+                $sql = mysqli_query($con, "SELECT tk.tanggal_beli, pd.nama, m.nama_motor,m.tahun,m.harga,tk.uang_muka,tk.tenor,tk.status_lunas FROM transaksi_kredit tk JOIN motor m ON tk.id_motor = m.id JOIN user u ON tk.id_user = u.id_user JOIN personal_data pd ON u.personal_id = pd.id WHERE tk.status='Terima' ORDER BY status_lunas DESC
                 ");
 
                 while($data = mysqli_fetch_object($sql))
                 {
                     ?>
                         <tr>
-                            <td><?= ($data->tanggal_pembelian == NULL ? " " : date('d-m-Y', strtotime($data->tanggal_pembelian))); ?></td>
+                            <td><?= ($data->tanggal_beli == NULL ? '' : date('d-m-Y', strtotime($data->tanggal_beli)))?></td>
                             <td><?= $data->nama; ?></td>
-                            <td><?= $data->nama_motor." ({$data->tahun}) "; ?></td>
-                            <td><?= ($data->harga == NULL ? '' : "Rp. ".number_format($data->harga, 0,',','.')) ?></td>
-                            <td><?= $data->pembayaran; ?></td>
-                            <td><?= $data->status; ?></td>
+                            <td><?= $data->nama_motor." ({$data->tahun})"; ?></td>
+                            <td><?= ($data->harga == NULL ? '' : "Rp. ".number_format($data->harga, 0,',','.'))?></td>
+                            <td><?= ($data->uang_muka == NULL ? '' : "Rp. ".number_format($data->uang_muka, 0,',','.'))?></td>
+                            <td><?= $data->tenor." X"?></td>
+                            <td><?= ($data->status_lunas == "Belum" ? 'Belum' : ''). " Lunas"?></td>
                         </tr>
                     <?php
                 }
@@ -127,5 +129,5 @@ ob_end_clean();
 
 $dom->setPaper('A4', 'portrat');
 $dom->render();
-$dom->stream("Laporan Pembelian Cash.pdf", array("Attachment" => false));
+$dom->stream("Laporan Pembelian Kredit.pdf", array("Attachment" => false));
 ?>

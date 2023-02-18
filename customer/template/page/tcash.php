@@ -3,7 +3,7 @@
 
     <div class="container">
         <div id="tcash" class="table-responsive">
-            <table class="table table-striped table-sm" style="font-size:10px;">
+            <table class="table table-striped table-sm" style="font-size:12px;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -28,10 +28,10 @@
                                     <td><?= $data->nama_motor ?> (<?= $data->tahun; ?>)</td>
                                     <td><?= 'Rp. '.number_format($data->harga, 0,'.','.') ?></td>
                                     <td><?= $data->pembayaran; ?></td>
-                                    <td><?= date('d-m-Y H:i:s', strtotime($data->tanggal_pembelian)); ?></td>
+                                    <td><?= date('d-m-Y', strtotime($data->tanggal_pembelian)); ?></td>
                                     <td><?= ($data->status == NULL ? 'Antrian' : $data->status); ?></td>
                                     <td>
-                                        <button class="btn btn-info text-white btn-sm">
+                                        <button class="btn btn-info text-white btn-sm print-invoice-cash" <?= ($data->status == "Unpaid" ? 'disabled' : 'data-id="'."{$data->id}".'"')?> style="font-size: 10px;">
                                             <em class="fas fa-print"></em>
                                         </button>
                                     </td>

@@ -4,6 +4,8 @@
         <em class="fas fa-download"></em> Download Laporan
     </button>
 
+    
+
     <div class="table-responsive mt-2">
         <table class="table table-striped table-sm rep-kredit" style="font-size:14px;">
             <thead>
@@ -34,7 +36,7 @@
                                 <td><?= ($data->uang_muka == NULL ? '' : "Rp. ".number_format($data->uang_muka, 0,',','.'))?></td>
                                 <td><?= $data->tenor." X"?></td>
                                 <td><?= $data->status_lunas; ?></td>
-                                <td><button type="button" class="btn btn-info text-white btn-sm print-invoice-kredit" style="font-size: 10px;"><em class="fas fa-print"></em></button></td>
+                                <td><button type="button" class="btn btn-info text-white btn-sm print-invoice-kredit" data-id="<?= $data->id; ?>" style="font-size: 10px;"><em class="fas fa-print"></em></button></td>
                             </tr>
                         <?php
                     }
