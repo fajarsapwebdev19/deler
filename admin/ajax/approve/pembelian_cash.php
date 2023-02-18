@@ -68,7 +68,18 @@
 
             $tolak .= mysqli_query($con, "UPDATE motor SET stok='$stok' WHERE id='$idm'");
 
+            $btc = mysqli_query($con, "SELECT bukti FROM bukti_transfer_cash WHERE id_transaksi='$id'");
+
+            $btcs = mysqli_fetch_object($btc);
+
+            if(file_exists("../../../img/bukti_transfer/".$btcs->bukti))
+            {
+                unlink("../../../img/bukti_transfer/".$btcs->bukti);
+            }
+
             $tolak .= mysqli_query($con, "DELETE FROM bukti_transfer_cash WHERE id_transaksi='$id'");
+
+            $tolak .= mysqli_query($con, "ALTER TABLE transaksi_cash AUTO_INCREMENT=1");
 
             
 
